@@ -79,225 +79,8 @@ void afficherPlateau(char matrice_jeu[][42]) {
 	printf("\n");
 };
 
-int Couleur() {
-	char couleur[Joueur];
-	printf("Joueur 1 quelle couleur voulez vous ?\n\n");
-	printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-	printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-	printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-	printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-	scanf("%c", &couleur[0]); getchar();
-	if (couleur[0] == 'R') {
-		printf("Joueur 2 quelle couleur voulez vous ?\n\n");
-		printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-		printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-		printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-		scanf("%c", &couleur[1]); getchar();
-		if (couleur[1] == 'V') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-			printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'J') {
-				couleur[3] = 'B';
-				printf("\nJoueur 4:" COLOR_BLUE "Bleu\n" RESET);
-			}
-			else {
-				couleur[3] = 'J';
-				printf("\nJoueur 4:" COLOR_YELLOW "Jaune\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'J') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-			printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'V') {
-				couleur[3] = 'B';
-				printf("\nJoueur 4:" COLOR_BLUE "Bleu\n" RESET);
-			}
-			else {
-				couleur[3] = 'V';
-				printf("\nJoueur 4:" COLOR_GREEN "Vert\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'B') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-			printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'J') {
-				couleur[3] = 'V';
-				printf("\nJoueur 4:" COLOR_GREEN "Vert\n" RESET);
-			}
-			else {
-				couleur[3] = 'J';
-				printf("\nJoueur 4:" COLOR_YELLOW "Jaune\n" RESET);
-			}
-		}
-		else {
-			printf("Couleur invalide!\n");
-		}
-	}
-	else if (couleur[0] == 'V') {
-		printf("Joueur 2 quelle couleur voulez vous ?\n\n");
-		printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-		printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-		printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-		scanf("%c", &couleur[1]); getchar();
-		if (couleur[1] == 'R') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-			printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'J') {
-				couleur[3] = 'B';
-				printf("\nJoueur 4:" COLOR_BLUE "Bleu\n" RESET);
-			}
-			else {
-				couleur[3] = 'J';
-				printf("\nJoueur 4:" COLOR_YELLOW "Jaune\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'J') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-			printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'R') {
-				couleur[3] = 'B';
-				printf("\nJoueur 4:" COLOR_BLUE "Bleu\n" RESET);
-			}
-			else {
-				couleur[3] = 'R';
-				printf("\nJoueur 4:" COLOR_RED "Rouge\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'B') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-			printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'J') {
-				couleur[3] = 'R';
-				printf("\nJoueur 4:" COLOR_RED "Rouge\n" RESET);
-			}
-			else {
-				couleur[3] = 'J';
-				printf("\nJoueur 4:" COLOR_YELLOW "Jaune\n" RESET);
-			}
-		}
-		else {
-			printf("Couleur invalide!\n");
-		}
-	}
-	else if (couleur[0] == 'J') {
-		printf("Joueur 2 quelle couleur voulez vous ?\n\n");
-		printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-		printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-		printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-		scanf("%c", &couleur[1]); getchar();
-		if (couleur[1] == 'V') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-			printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'R') {
-				couleur[3] = 'B';
-				printf("\nJoueur 4:" COLOR_BLUE "Bleu\n" RESET);
-			}
-			else {
-				couleur[3] = 'R';
-				printf("\nJoueur 4:" COLOR_RED "Rouge\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'R') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-			printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'V') {
-				couleur[3] = 'B';
-				printf("\nJoueur 4:" COLOR_BLUE "Bleu\n" RESET);
-			}
-			else {
-				couleur[3] = 'V';
-				printf("\nJoueur 4:" COLOR_GREEN "Vert\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'B') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-			printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'R') {
-				couleur[3] = 'V';
-				printf("\nJoueur 4:" COLOR_GREEN "Vert\n" RESET);
-			}
-			else {
-				couleur[3] = 'R';
-				printf("\nJoueur 4:" COLOR_RED "Rouge\n" RESET);
-			}
-		}
-		else {
-			printf("Couleur invalide!\n");
-		}
-	}
-	else if (couleur[0] == 'B') {
-		printf("Joueur 2 quelle couleur voulez vous ?\n\n");
-		printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-		printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-		printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-		scanf("%c", &couleur[1]); getchar();
-		if (couleur[1] == 'V') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-			printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'J') {
-				couleur[3] = 'R';
-				printf("\nJoueur 4:" COLOR_RED "Rouge\n" RESET);
-			}
-			else {
-				couleur[3] = 'J';
-				printf("\nJoueur 4:" COLOR_YELLOW "Jaune\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'J') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-			printf(COLOR_RED "Rouge\n" RESET "(R)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'V') {
-				couleur[3] = 'R';
-				printf("\nJoueur 4:" COLOR_RED "Rouge\n" RESET);
-			}
-			else {
-				couleur[3] = 'V';
-				printf("\nJoueur 4:" COLOR_GREEN "Vert\n" RESET);
-			}
-		}
-		else if (couleur[1] == 'R') {
-			printf("Joueur 3 quelle couleur voulez vous ?\n\n");
-			printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
-			printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
-			scanf("%c", &couleur[2]); getchar();
-			if (couleur[2] == 'J') {
-				couleur[3] = 'V';
-				printf("\nJoueur 4:" COLOR_GREEN "Vert\n" RESET);
-			}
-			else {
-				couleur[3] = 'J';
-				printf("\nJoueur 4:" COLOR_YELLOW "Jaune\n" RESET);
-			}
-		}
-		else {
-			printf("Couleur invalide!\n");
-		}
-	}
-	else {
-		printf("Couleur invalide!\n");
-	}
+int InitJoueurs() {
+
 }
 
 int main() {
@@ -333,28 +116,62 @@ int main() {
 
 	afficherPlateau(matrice_jeu);
 
-	char Verification[Joueur] = { 0,0,0,0 };
-	char couleur[][10] = { "Rouge","Vert","Jaune","Bleu" };
+	int verif[Joueur] = {0,0,0,0};
+	char couleur_[Joueur] ; 
+	char couleur[Joueur] = {'J','B','V','R'};
+	char pseudo[Joueur][15];
+	char col; 
 
 	for (int i = 0; i < Joueur; i++) {
+		int j = 0; 
 		do {
-			printf("Joueur %d quelle couleur voulez vous ?\n\n", i+1);
-			if (Verification[0] == 0) {
-				printf(COLOR_RED "Rouge\n" RESET "(R)\n");
+			if (verif[0] == 0) {
+				printf(COLOR_YELLOW "Jaune (J)\n" RESET);
 			}
-			if (Verification[1] == 0) {
-				printf(COLOR_GREEN "Vert\n" RESET "(V)\n");
+			if (verif[1] == 0) {
+				printf(COLOR_CYAN "Bleu (B)\n" RESET);
 			}
-			if (Verification[2] == 0) {
-				printf(COLOR_YELLOW "Jaune\n" RESET "(J)\n");
+			if (verif[2] == 0) {
+				printf(COLOR_GREEN "Vert (V)\n" RESET);
 			}
-			if (Verification[3] == 0) {
-				printf(COLOR_BLUE "Bleu\n" RESET "(B)\n");
+			if (verif[3] == 0) {
+				printf(COLOR_RED "Rouge (R)\n" RESET);
 			}
-			scanf("%c", &couleur[i]); getchar();
+			printf("i:%d", i); 
+			printf("\nJoueur %d quelle couleur voulez vous ? ", i + 1);
+			scanf("%c", &col); getchar();
+			printf("\n");
+			while ((j < Joueur) && (couleur[j] != col)) j++;
+
+
+			if ( j >= Joueur || verif[j] == 1) {
+				printf("Cette couleur n'est pas disponible\n\n");
+				/*couleur_[i] = col;
+				verif[j] = 1;
+				res = true;*/
+			}
+			else
+				verif[j] = 1; 
+			/*if (couleur[i] == 'J') {
+				verif[0] = 1;
+			}
+			if (couleur[i] == 'B') {
+				verif[1] = 1;
+			}
+			if (couleur[i] == 'V') {
+				verif[2] = 1;
+			}
 			if (couleur[i] == 'R') {
-				Verification[0] = 1;
+				verif[3] = 1;
+			}*/
+			/*if (couleur[i] != 'J' && couleur[i] != 'B' && couleur[i] != 'V' && couleur[i] != 'R') {
+				printf("Cette couleur n'est pas disponible\n\n");
 			}
-		} while (couleur[i] != 'R' || couleur[i] != 'V' || couleur[i] != 'J' || couleur[i] != 'B' && couleur[i] != couleur[i-1]);
+			printf("Comment vous appelez-vous ? ");
+			scanf("%s", &pseudo[i]); getchar();
+			printf("\nVous avez choisi %s\n\n", pseudo[i]);*/
+		} while (verif[j] != 0);//while (couleur[i] != 'J' && couleur[i] != 'B' && couleur[i] != 'V' && couleur[i] != 'R');
+		couleur_[i] = col;
+		//verif[j] = 1;
 	}
 }
