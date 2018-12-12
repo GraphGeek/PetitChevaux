@@ -34,7 +34,8 @@
 typedef enum {JAUNE, BLEU, VERT, ROUGE} color;
 
 typedef struct {
-	char nomJoueur;
+	char nom;
+	int num;
 	color couleur;
 	int chevaux[4];
 } joueur;

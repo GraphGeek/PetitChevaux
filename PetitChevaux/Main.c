@@ -118,53 +118,59 @@ int main() {
 
 	printf("\n");
 
+	/* Nombre de Joueur*/
+	int nb_joueur;
+	do
+	{
+		printf("Nombre de Joueur pour la Partie : ");
+		scanf("%d", &nb_joueur);
+	} while ((nb_joueur < 0) || (nb_joueur > 4));
 
-	int verif[Joueur] = { 0,0,0,0 }; //Tableau de booléens : Permet de vérifier la disponibilité d'une couleur
-	char couleur[Joueur] = { 'J','B','V','R' }; //Tableau des couleurs disponibles
-	char color;
-	int i = 0, j = 0;
+	/* Séléction des Joueurs*/
+	joueur joueur[4];
+	int couleur_num;
+	int verif[4] = { 0,0,0,0 };
+	char coul_e[][10] = { "BLEU", "ROUGE", "VERT", "JAUNE" };
 
-	char pseudo[Joueur][15]; //Tableau des pseudos
 
-	for (i = 0; i < Joueur; i++) {
+	for (int i = 0; i < nb_joueur; i++) {
+		printf("Nom du Joueur %d : \n", i + 1);
+		scanf("%s", &joueur[i].nom);
+		joueur[i].num = i + 1;
+
 		do {
-			//Attribution des couleurs
+			printf("Quelle Couleur voulez-vous :\n");
 			if (verif[0] == 0) {
-				printf(COLOR_YELLOW "Jaune (J)\n" RESET);
+				printf(COLOR_BLUE);
+				printf("Bleu (1)\n");
 			}
 			if (verif[1] == 0) {
-				printf(COLOR_CYAN "Bleu (B)\n" RESET);
+				printf(COLOR_RED);
+				printf("Rouge (2)\n");
 			}
 			if (verif[2] == 0) {
-				printf(COLOR_GREEN "Vert (V)\n" RESET);
+				printf(COLOR_GREEN);
+				printf("Vert (3)\n");
 			}
 			if (verif[3] == 0) {
-				printf(COLOR_RED "Rouge (R)\n" RESET);
+				printf(COLOR_YELLOW);
+				printf("Jaune (4)\n");
+			}
+			printf(RESET);
+			scanf("%d", &couleur_num);
+
+			if (verif[couleur_num - 1] == 1)
+			{
+				printf("Couleur deja prise\n");
 			}
 
-			printf("\nJoueur %d quelle couleur voulez vous ? ", i + 1);
-			scanf("%c", &color); getchar();
-			printf("\n");
-
-			//On vérifie si la couleur est disponible
-			while ((j < Joueur) && (couleur[j] != color)) j++;
-
-			//Cette condition permet de tester la disponibilité d'une couleur (couleur déjà utilisée ou inexistante)
-			if (j >= Joueur || verif[j] == 1 /* Condition à ajouter ici */) {
-				printf("Cette couleur n'est pas disponible\n\n");
-				i--; //Il faut enlever un tour de boucle pour ne pas passer à la saisie du joueur suivant en cas d'erreur
-			}
-			else {
-				verif[j] = 1;
-			}
-
-		} while (verif[j] != 0 && couleur[i] != 'J' && couleur[i] != 'B' && couleur[i] != 'V' && couleur[i] != 'R');
+		} while ((verif[couleur_num - 1] != 0) || ((couleur_num < 0) || (couleur_num > 4)));
+		verif[couleur_num - 1] = 1;
+		joueur[i].couleur = couleur_num - 1;
 	}
-}
 
-/*
-	//Enregistrement du pseudo
-	printf("Comment vous appelez-vous ? ");
-	scanf("%s", &pseudo[i]); getchar();
-	printf("\nVous avez choisi %s\n\n", pseudo[i]);
-*/
+	printf("Joueur 1: %s ID: %d\n %s\n", joueur[0].nom, joueur[0].num, coul_e[joueur[0].couleur]);
+
+	printf("Joueur 2: %s ID: %d\n %s\n", joueur[1].nom, joueur[1].num, coul_e[joueur[1].couleur]);
+
+}
