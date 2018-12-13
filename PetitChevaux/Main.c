@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stdbool.h>
 #include "PetitsChevaux.h"
-
-#define Joueur 4
 
 int lancerDe() {
 	srand(time(NULL));
@@ -79,11 +73,14 @@ void afficherPlateau(char matrice_jeu[][42]) {
 	printf("\n");
 };
 
-int InitJoueurs() {
-
+void initJeu() {
+	int nbJoueurs = 0;
+	printf(BRIGHT "BIENVENUE DANS LE JEU DES PETITS CHEVAUX\n\n" RESET);
+	initPlateau();
+	initJoueurs(&nbJoueurs);
 }
 
-int main() {
+void initPlateau() {
 	//Création du plateau sous forme de matrice, les valeurs indiquées autour permettent de connaître la coresspondance
 	//des cases du plateau avec leurs coordonnées dans la matrice
 
@@ -92,85 +89,80 @@ int main() {
 	//Cases du plateau			  1 2  3  4  5  6  7  8  9  10 11 12 13 1415
 	//Coordonnées matrice  (x)    0 2  5  8  11 14 17 20 23 26 29 32 35 3840   //	y
 
-	char matrice_jeu[17][42] = { {"[][][][][][][][]         [][][][][][][][]"}, //	0
-								{"[][][][][][][][] O  O  0 [][][][][][][][]"}, //	1
-								{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	2
-								{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	3
-								{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	4
-								{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	5
-								{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	6
-								{"0 O  O  O  O  O  O [6] O  O  O  O  O  O O"}, //	7
-								{"O[1][2][3][4][5][6][X][6][5][4][3][2][1]O"}, //	8
-								{"O O  O  O  O  O  O [6] O  O  O  O  O  O 0"}, //	9
-								{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	10
-								{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	11
-								{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	12
-								{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	13
-								{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	14
-								{"[][][][][][][][] 0  O  O [][][][][][][][]"}, //	15
-								{"[][][][][][][][]         [][][][][][][][]"}  //	16
+	char matrice_jeu[17][42] = {
+		{"[][][][][][][][]         [][][][][][][][]"}, //	0
+		{"[][][][][][][][] O  O  0 [][][][][][][][]"}, //	1
+		{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	2
+		{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	3
+		{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	4
+		{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	5
+		{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	6
+		{"0 O  O  O  O  O  O [6] O  O  O  O  O  O O"}, //	7
+		{"O[1][2][3][4][5][6][X][6][5][4][3][2][1]O"}, //	8
+		{"O O  O  O  O  O  O [6] O  O  O  O  O  O 0"}, //	9
+		{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	10
+		{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	11
+		{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	12
+		{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	13
+		{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	14
+		{"[][][][][][][][] 0  O  O [][][][][][][][]"}, //	15
+		{"[][][][][][][][]         [][][][][][][][]"}  //	16
 	};
+	//afficherPlateau(matrice_jeu); //Temporaire -> A voir pour retourner une matrice (malloc)
+}
 
-	//On sauvegarde une copie du plateau, cela sera utile lorsqu'on voudra effectuer des modifications
-	char copie_matrice = matrice_jeu;
-
-	afficherPlateau(matrice_jeu);
-
-	printf("\n");
-
-	/* Nombre de Joueur*/
-	int nb_joueur;
+void initJoueurs(int *nbJoueurs) {
+	joueur joueur[4];
+	int couleur_num = 0;
+	int verif[] = { 0,0,0,0 };
 	do
 	{
-		printf("Nombre de Joueur pour la Partie : ");
-		scanf("%d", &nb_joueur);
-	} while ((nb_joueur < 0) || (nb_joueur > 4));
-
-	/* Séléction des Joueurs*/
-	joueur joueur[4];
-	int couleur_num;
-	int verif[4] = { 0,0,0,0 };
-	char coul_e[][10] = { "BLEU", "ROUGE", "VERT", "JAUNE" };
-
-
-	for (int i = 0; i < nb_joueur; i++) {
-		printf("Nom du Joueur %d : \n", i + 1);
-		scanf("%s", &joueur[i].nom);
+		printf("Nombre de Joueur pour la Partie (1 a 4 joueurs) : ");
+		scanf("%d", nbJoueurs);
+		if ((*nbJoueurs < 0) || (*nbJoueurs > 4)) {
+			printf("Veuillez choisir un nombre de joueurs compris entre 1 et 4 !\n");
+		}
+	} while ((*nbJoueurs < 0) || (*nbJoueurs > 4));
+	for (int i = 0; i < *nbJoueurs; i++) {
+		//Enregistrement du pseudo
+		printf("\nJoueur %d, choisissez un pseudo : ", i + 1);
+		scanf("%s", joueur[i].pseudo);
 		joueur[i].num = i + 1;
 
+		//Enregistrement des couleurs
 		do {
-			printf("Quelle Couleur voulez-vous :\n");
+			printf("\n%s, quelle couleur voulez-vous :\n\n", joueur[i].pseudo);
 			if (verif[0] == 0) {
-				printf(COLOR_BLUE);
-				printf("Bleu (1)\n");
+				printf(COLOR_CYAN "BLEU (1)\n" RESET);
 			}
 			if (verif[1] == 0) {
-				printf(COLOR_RED);
-				printf("Rouge (2)\n");
+				printf(COLOR_RED "ROUGE (2)\n" RESET);
 			}
 			if (verif[2] == 0) {
-				printf(COLOR_GREEN);
-				printf("Vert (3)\n");
+				printf(COLOR_GREEN "VERT (3)\n" RESET);
 			}
 			if (verif[3] == 0) {
-				printf(COLOR_YELLOW);
-				printf("Jaune (4)\n");
+				printf(COLOR_YELLOW "JAUNE (4)\n" RESET);
 			}
-			printf(RESET);
 			scanf("%d", &couleur_num);
 
 			if (verif[couleur_num - 1] == 1)
 			{
-				printf("Couleur deja prise\n");
+				printf("\nErreur : Cette couleur est deja utilisee !\n\n");
+			}
+
+			if ((couleur_num < 0) || (couleur_num > 4)) {
+				printf("\nErreur : Cette couleur n'existe pas !\n\n");
 			}
 
 		} while ((verif[couleur_num - 1] != 0) || ((couleur_num < 0) || (couleur_num > 4)));
+		//On bloque la couleur
 		verif[couleur_num - 1] = 1;
+		//On attribue la couleur au joueur
 		joueur[i].couleur = couleur_num - 1;
 	}
+}
 
-	printf("Joueur 1: %s ID: %d\n %s\n", joueur[0].nom, joueur[0].num, coul_e[joueur[0].couleur]);
-
-	printf("Joueur 2: %s ID: %d\n %s\n", joueur[1].nom, joueur[1].num, coul_e[joueur[1].couleur]);
-
+int main() {
+	initJeu();
 }

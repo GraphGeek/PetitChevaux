@@ -1,6 +1,13 @@
 #ifndef PETIT_CHEVAUX_H
 #define PETIT_CHEVAUX_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+#include <ctype.h>
+#include <string.h>
+
 #define RESET			"\x1b[0m" //Réinitialise la mise en forme
 
 //Mises en forme
@@ -34,7 +41,7 @@
 typedef enum {JAUNE, BLEU, VERT, ROUGE} color;
 
 typedef struct {
-	char nom;
+	char pseudo[20];
 	int num;
 	color couleur;
 	int chevaux[4];
@@ -59,5 +66,9 @@ typedef struct {
 
 int lancerDe();
 void afficherPlateau(char matrice_jeu[][42]);
+void initJeu();
+void initPlateau();
+void initJoueurs(int *nbJoueurs);
+
 
 #endif
