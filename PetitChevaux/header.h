@@ -1,6 +1,7 @@
 #ifndef PETIT_CHEVAUX_H
 #define PETIT_CHEVAUX_H
 
+//Bibliothèques
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -38,13 +39,13 @@
 #define BG_CYAN			"\x1b[46m"
 #define BG_WHITE		"\x1b[47m"
 
-typedef enum {JAUNE, BLEU, VERT, ROUGE} color;
+typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
 
 typedef struct {
-	char pseudo[20];
+	char pseudo[15];
 	int num;
-	color couleur;
-	int chevaux[4];
+	couleur couleur;
+	int nb_chevaux;
 } joueur;
 
 typedef struct {
@@ -54,7 +55,7 @@ typedef struct {
 
 typedef struct {
 	bool etat;
-	color couleur;
+	couleur couleur;
 } cheval;
 
 typedef struct {
@@ -63,12 +64,10 @@ typedef struct {
 } cellule;
 
 //Fonctions
-
 int lancerDe();
-void afficherPlateau(char matrice_jeu[][42]);
+void afficherPlateau(char matrice_jeu[][42], joueur *joueur);
 void initJeu();
 void initPlateau();
-void initJoueurs(int *nbJoueurs);
-
+void initJoueurs(int *nbJoueurs, joueur *joueur);
 
 #endif
