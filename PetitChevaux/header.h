@@ -1,7 +1,7 @@
-#ifndef PETIT_CHEVAUX_H
+ï»¿#ifndef PETIT_CHEVAUX_H
 #define PETIT_CHEVAUX_H
 
-//Bibliothèques
+//BibliothÃ¨ques
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -9,15 +9,15 @@
 #include <ctype.h>
 #include <string.h>
 
-#define RESET			"\x1b[0m" //Réinitialise la mise en forme
+#define RESET			"\x1b[0m" //RÃ©initialise la mise en forme
 
 //Mises en forme
 #define BRIGHT			"\x1b[1m" //Gras
 #define DIM				"\x1b[2m" //Normal
-#define UNDERSCORE		"\x1b[4m" //Souligné
+#define UNDERSCORE		"\x1b[4m" //SoulignÃ©
 #define BLINK			"\x1b[5m" //Clignotant
-#define REVERSE			"\x1b[7m" //Couleur inversée
-#define HIDDEN			"\x1b[8m" //Caché
+#define REVERSE			"\x1b[7m" //Couleur inversÃ©e
+#define HIDDEN			"\x1b[8m" //CachÃ©
 
 //Couleurs
 #define COLOR_BLACK		"\x1b[30m"
@@ -39,18 +39,23 @@
 #define BG_CYAN			"\x1b[46m"
 #define BG_WHITE		"\x1b[47m"
 
-typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
+//Emoji Cheval
+#define CHEVAL			"\u265E"
 
+typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
 typedef struct {
 	char pseudo[15];
 	int num;
 	couleur couleur;
 	int nb_chevaux;
+	bool chemin_final[6];
 } joueur;
 
 typedef struct {
 	int plateau[15][15];
 	char matrice_jeu[17][42];
+	int chemin[55];
+	//bleu 0->55, rouge 14->55->13, vert 28->55->27, jaune 42->55->41 
 } plateau;
 
 typedef struct {

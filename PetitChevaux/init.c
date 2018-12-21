@@ -4,7 +4,7 @@
 void initJeu() {
 	int nbJoueurs = 4;
 	joueur joueur[4];
-	printf(BRIGHT "|LE JEU DES PETITS CHEVAUX|\n" RESET);
+	printf(BRIGHT "| [" CHEVAL "] LE JEU DES PETITS CHEVAUX |\n" RESET);
 	//initPlateau();
 	/////////////////////////////////////////////////////////
 	//En attendant de faire passer la matrice par la fonction
@@ -127,7 +127,9 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	}
 
 	//On teste
+	/*
 	for (int i = 0; i < 4; i++) {
 		printf("Joueur %d | NumJoueur %d | Pseudo : %s | Couleur : %d | Nombre de chevaux : %d\n", i + 1, joueur[i].num, joueur[i].pseudo, joueur[i].couleur, joueur[i].nb_chevaux);
 	}
+	*/
 }

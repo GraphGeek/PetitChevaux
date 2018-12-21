@@ -10,7 +10,7 @@ int lancerDe() {
 void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 	int x, y;
 	//Affichage de la matrice caractère par caractère et coloration
-	printf(COLOR_YELLOW "JOUEUR 1" COLOR_WHITE "     (%d) CHEVAUX (%d)     " COLOR_CYAN "JOUEUR 2" RESET, joueur[0].nb_chevaux, joueur[1].nb_chevaux);
+	printf(COLOR_YELLOW "JOUEUR 1" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_CYAN "(%d)     " "JOUEUR 2" RESET, joueur[0].nb_chevaux, joueur[1].nb_chevaux);
 	printf("\n");
 	printf("\n");
 	for (x = 0; x < 16 + 1; x++) {
@@ -70,6 +70,6 @@ void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 		printf("\n");
 	}
 	printf("\n");
-	printf(COLOR_GREEN "JOUEUR 3" COLOR_WHITE "     (%d) CHEVAUX (%d)     " COLOR_RED "JOUEUR 4" RESET, joueur[2].nb_chevaux, joueur[3].nb_chevaux);
+	printf(COLOR_GREEN "JOUEUR 3" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_RED "(%d)     " "JOUEUR 4" RESET, joueur[2].nb_chevaux, joueur[3].nb_chevaux);
 	printf("\n");
 };
