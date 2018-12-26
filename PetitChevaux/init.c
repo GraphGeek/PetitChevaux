@@ -1,5 +1,6 @@
 //Ce fichier contient toutes les fonctions d'initialisation du jeu
-#include "header.h"
+#include "main.h"
+#include "init.h"
 
 void initJeu() {
 	int nbJoueurs = 4;

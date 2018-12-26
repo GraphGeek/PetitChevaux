@@ -15,7 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header.h">
+    <ClInclude Include="init.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="game_controller.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,7 +32,7 @@
     <ClCompile Include="init.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="game.c">
+    <ClCompile Include="game_controller.c">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

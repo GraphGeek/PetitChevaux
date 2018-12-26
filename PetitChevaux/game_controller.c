@@ -1,5 +1,6 @@
 //Ce fichier contient toutes les fonctions utiles lors d'un tour de jeu
-#include "header.h"
+#include "main.h"
+#include "game_controller.h"
 
 int lancerDe() {
 	srand(time(NULL));

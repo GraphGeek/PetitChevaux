@@ -68,11 +68,4 @@ typedef struct {
 	int y;
 } cellule;
 
-//Fonctions
-int lancerDe();
-void afficherPlateau(char matrice_jeu[][42], joueur *joueur);
-void initJeu();
-void initPlateau();
-void initJoueurs(int *nbJoueurs, joueur *joueur);
-
 #endif
