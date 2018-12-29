@@ -4,8 +4,14 @@
 
 int lancerDe() {
 	srand(time(NULL));
-	int R = rand() % 7; //Modulo 7 car 6 + 1
-	printf("Valeur du lancer : %i\n", R);
+	int R;
+	for (int i = 1 ; i <= 4 ; i++) {
+		printf("Joueur %d : ", i);
+		do {
+			R = rand() % 7; //Modulo 7 car 6 + 1
+		} while (R == 0);
+		printf("%i\n", R);
+	}
 }
 
 void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
@@ -73,4 +79,8 @@ void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 	printf("\n");
 	printf(COLOR_GREEN "JOUEUR 3" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_RED "(%d)     " "JOUEUR 4" RESET, joueur[2].nb_chevaux, joueur[3].nb_chevaux);
 	printf("\n");
+};
+
+void tour() {
+	lancerDe();
 };
