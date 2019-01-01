@@ -1,6 +1,9 @@
 //Ce fichier contient toutes les fonctions utiles lors d'un tour de jeu
+#include <stdbool.h>
 #include "main.h"
 #include "game_controller.h"
+
+bool victoire;
 
 void lancerDe() {
 	srand(time(NULL));
