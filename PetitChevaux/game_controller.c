@@ -2,7 +2,7 @@
 #include "main.h"
 #include "game_controller.h"
 
-int lancerDe() {
+void lancerDe() {
 	srand(time(NULL));
 	int R;
 	for (int i = 1 ; i <= 4 ; i++) {
@@ -16,13 +16,13 @@ int lancerDe() {
 
 void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 	int x, y;
-	//Affichage de la matrice caractère par caractère et coloration
+	//Affichage de la matrice caractÃ¨re par caractÃ¨re et coloration
 	printf(COLOR_YELLOW "JOUEUR 1" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_CYAN "(%d)     " "JOUEUR 2" RESET, joueur[0].nb_chevaux, joueur[1].nb_chevaux);
 	printf("\n");
 	printf("\n");
 	for (x = 0; x < 16 + 1; x++) {
 		for (y = 0; y < 41; y++) {
-			//Couleur de fond des écuries
+			//Couleur de fond des Ã©curies
 			if (x >= 0 && x < 7 && y >= 0 && y < 16) {
 				printf(COLOR_YELLOW BG_YELLOW "%c" RESET, matrice_jeu[x][y]);
 			}
@@ -65,11 +65,11 @@ void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 			else if ((x == 8) && (y >= 19 && y <= 21)) {
 				printf(COLOR_BLACK BG_WHITE "%c" RESET, matrice_jeu[x][y]);
 			}
-			//Accentuation des cases de départ des écuries
+			//Accentuation des cases de dÃ©part des Ã©curies
 			else if ((x == 1 && y == 23) || (x == 7 && y == 0) || (x == 9 && y == 40) || (x == 15 && y == 17)) {
 				printf(BRIGHT "%c" RESET, matrice_jeu[x][y]);
 			}
-			//Affichage des autres éléments
+			//Affichage des autres Ã©lÃ©ments
 			else {
 				printf("%c", matrice_jeu[x][y]);
 			}

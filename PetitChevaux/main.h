@@ -68,4 +68,7 @@ typedef struct {
 	int y;
 } cellule;
 
+void initJeu();
+void tour();
+
 #endif

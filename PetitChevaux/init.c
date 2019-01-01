@@ -7,40 +7,17 @@ void initJeu() {
 	joueur joueur[4];
 	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
 	//initPlateau();
-	/////////////////////////////////////////////////////////
-	//En attendant de faire passer la matrice par la fonction
-	char matrice_jeu[17][42] = {
-		{"[][][][][][][][]         [][][][][][][][]"}, //	0
-		{"[][][][][][][][] O  O  0 [][][][][][][][]"}, //	1
-		{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	2
-		{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	3
-		{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	4
-		{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	5
-		{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	6
-		{"0 O  O  O  O  O  O [6] O  O  O  O  O  O O"}, //	7
-		{"O[1][2][3][4][5][6][X][6][5][4][3][2][1]O"}, //	8
-		{"O O  O  O  O  O  O [6] O  O  O  O  O  O 0"}, //	9
-		{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	10
-		{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	11
-		{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	12
-		{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	13
-		{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	14
-		{"[][][][][][][][] 0  O  O [][][][][][][][]"}, //	15
-		{"[][][][][][][][]         [][][][][][][][]"}  //	16
-	};
-	/////////////////////////////////////////////////////////
-	initJoueurs(&nbJoueurs, &joueur);
-	afficherPlateau(matrice_jeu, &joueur);
+	initJoueurs(&nbJoueurs, joueur);
 }
 
 void initPlateau() {
-	//Cr�ation du plateau sous forme de matrice, les valeurs indiqu�es autour permettent de conna�tre la coresspondance
-	//des cases du plateau avec leurs coordonn�es dans la matrice
+	//Création du plateau sous forme de matrice, les valeurs indiqu�es autour permettent de conna�tre la coresspondance
+	//des cases du plateau avec leurs coordonnées dans la matrice
 
 	//Tableau[Ligne][Colonne]
 
 	//Cases du plateau			  1 2  3  4  5  6  7  8  9  10 11 12 13 1415
-	//Coordonn�es matrice  (x)    0 2  5  8  11 14 17 20 23 26 29 32 35 3840   //	y
+	//Coordonnées matrice  (x)    0 2  5  8  11 14 17 20 23 26 29 32 35 3840   //	y
 
 	char matrice_jeu[17][42] = {
 		{"[][][][][][][][]         [][][][][][][][]"}, //	0
