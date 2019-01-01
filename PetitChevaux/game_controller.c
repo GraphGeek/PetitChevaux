@@ -5,13 +5,10 @@
 void lancerDe() {
 	srand(time(NULL));
 	int R;
-	for (int i = 1 ; i <= 4 ; i++) {
-		printf("Joueur %d : ", i);
-		do {
-			R = rand() % 7; //Modulo 7 car 6 + 1
-		} while (R == 0);
-		printf("%i\n", R);
-	}
+	do { 
+		R = rand() % 7; //Modulo 7 car 6 + 1
+	} while (R == 0);
+	printf("%i\n", R);
 }
 
 void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
@@ -82,5 +79,8 @@ void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 };
 
 void tour() {
-	lancerDe();
+	for (int i = 1 ; i <= 4 ; i++) {
+		printf("Joueur %d : ", i);
+		lancerDe();	
+	}
 };
