@@ -5,7 +5,7 @@
 void initJeu() {
 	int nbJoueurs = 4;
 	joueur joueur[4];
-	printf(BRIGHT "| [" CHEVAL "] LE JEU DES PETITS CHEVAUX |\n" RESET);
+	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
 	//initPlateau();
 	/////////////////////////////////////////////////////////
 	//En attendant de faire passer la matrice par la fonction
@@ -34,13 +34,13 @@ void initJeu() {
 }
 
 void initPlateau() {
-	//Création du plateau sous forme de matrice, les valeurs indiquées autour permettent de connaître la coresspondance
-	//des cases du plateau avec leurs coordonnées dans la matrice
+	//Crï¿½ation du plateau sous forme de matrice, les valeurs indiquï¿½es autour permettent de connaï¿½tre la coresspondance
+	//des cases du plateau avec leurs coordonnï¿½es dans la matrice
 
 	//Tableau[Ligne][Colonne]
 
 	//Cases du plateau			  1 2  3  4  5  6  7  8  9  10 11 12 13 1415
-	//Coordonnées matrice  (x)    0 2  5  8  11 14 17 20 23 26 29 32 35 3840   //	y
+	//Coordonnï¿½es matrice  (x)    0 2  5  8  11 14 17 20 23 26 29 32 35 3840   //	y
 
 	char matrice_jeu[17][42] = {
 		{"[][][][][][][][]         [][][][][][][][]"}, //	0
@@ -68,7 +68,7 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	int couleur_num = 0;
 	int verif[] = { 0,0,0,0 };
 	/*
-	Pour le moment le nombre de joueur est forcément 4
+	Pour le moment le nombre de joueur est forcï¿½ment 4
 	do
 	{
 		printf("Nombre de Joueur pour la Partie (1 a 4 joueurs) : ");

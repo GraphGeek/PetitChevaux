@@ -40,7 +40,7 @@
 #define BG_WHITE		"\x1b[47m"
 
 //Emoji Cheval
-#define CHEVAL			"\ud83c\udfc7"
+#define CHEVAL			"\u265E"
 
 typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
 typedef struct {
