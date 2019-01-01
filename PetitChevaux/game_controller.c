@@ -7,7 +7,7 @@ bool victoire;
 
 void lancerDe() {
 	srand(time(NULL));
-	int R;
+	int R = 0;
 	do { 
 		R = rand() % 7; //Modulo 7 car 6 + 1
 	} while (R == 0);
