@@ -49,6 +49,10 @@ void initPlateau() {
 		printf(COLOR_YELLOW "%d" RESET, plateau.chemin.jaune[x]);
 	}
 	printf("\n");
+	/*
+		On pourra utiliser chaque chemin indépendamment pour chaque joueur et les comparer
+		à chaque fois que le cheval doit avancer pour vérifier la disponibiité d'une case
+	*/
 }
 
 void initJoueurs(int *nbJoueurs, joueur *joueur) {
