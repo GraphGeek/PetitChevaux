@@ -58,6 +58,7 @@ typedef struct {
 	int nbChevaux;
 	cheval cheval[4];
 	bool cheminFinal[6];
+	bool victoire;
 } joueur;
 
 typedef struct {
@@ -77,6 +78,8 @@ typedef struct {
 	int y;
 } cellule;
 
+void effacerEcran();
+void afficherTitre();
 void initJeu();
 void tour(int *nbJoueurs, joueur *joueur);
 

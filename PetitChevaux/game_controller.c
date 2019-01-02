@@ -3,8 +3,6 @@
 #include "main.h"
 #include "game_controller.h"
 
-bool victoire;
-
 int lancerDe() {
 	int r = 0;
 	do { 
@@ -48,16 +46,39 @@ void verifValeur(int *val){
 	}
 }
 
+void verifVictoire(int *nbJoueurs, joueur *joueur){
+	for (int i = 0; i < *nbJoueurs; i++) {
+		do {
+			if(joueur[i].victoire == true){
+				printf("%s a gagné la partie\n", joueur[i].pseudo);
+			}
+		} while (joueur[i].victoire == false);
+	}
+}
+
 void tour(int *nbJoueurs, joueur *joueur) {
 	//Variables temporaires
-	bool premierTour = true;
+	bool premierTour = false;
 	bool premiereCaseLibre = true;
 
 	for (int i = 0; i < *nbJoueurs; i++) {
+		//effacerEcran();
+		//afficherTitre();
 		if(premierTour) {
-			printf("Premier tour de jeu\n");
 			int val = lancerDe();
-			printf("Vous lancez le dé et avez obtenu un %d\n", val);
+			if(joueur[i].couleur == 0){
+				printf("\nAu tour de " COLOR_CYAN "%s\n\n", joueur[i].pseudo);
+				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+			} else if(joueur[i].couleur == 1){
+				printf("\nAu tour de " COLOR_RED "%s\n\n", joueur[i].pseudo);
+				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+			} else if(joueur[i].couleur == 2){
+				printf("\nAu tour de " COLOR_GREEN "%s\n\n", joueur[i].pseudo);
+				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+			} else if(joueur[i].couleur == 3){
+				printf("\nAu tour de " COLOR_YELLOW "%s\n\n", joueur[i].pseudo);				
+				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+			}
 			if(val == 6){
 				if(premiereCaseLibre) {
 					printf("Vous pouvez sortir un cheval\n");

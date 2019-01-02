@@ -6,7 +6,6 @@ void initJeu() {
 	int nbJoueurs = 4;
 	joueur joueur[nbJoueurs]; //On initialise un tableau de structure de type joueur pour les 4 joueurs
 	plateau plateau; //On initialise un plateau de type plateau
-	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
 	initPlateau(&plateau);
 	initJoueurs(&nbJoueurs, joueur);
 	tour(&nbJoueurs, joueur);
@@ -76,6 +75,8 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	} while ((*nbJoueurs < 0) || (*nbJoueurs > 4));
 	*/
 	for (int i = 0; i < *nbJoueurs; i++) {
+		effacerEcran();
+		afficherTitre();
 		//Enregistrement du pseudo
 		printf("\n");
 
@@ -126,6 +127,8 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 			joueur[i].cheval[j].etat = 0;
 			joueur[i].cheval[j].couleur = couleur_num - 1;
 		}
+
+		joueur[i].victoire = false;
 	}
 
 	/*

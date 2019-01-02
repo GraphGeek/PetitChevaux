@@ -7,5 +7,6 @@ void sortirCheval();
 void avancerCheval(int *val);
 void mangerCheval();
 void verifValeur(int *val);
+void verifVictoire(int *nbJoueurs, joueur *joueur);
 
 #endif
