@@ -12,27 +12,32 @@ void initJeu() {
 }
 
 void initPlateau() {
-	plateau plateau;
+	plateau plateau; //On initialise un plateau de type plateau
 	int x, y;
 	//Initialisation à zéro
+	//Initialisation du plateau
 	for(x = 0; x < 15; x++){
 		for(y = 0; y < 15; y++){
 			plateau.plateau[x][y] = 0;
 		}
 	}
+	//Initialisation des chemins des joueurs
 	for(x = 0; x < 55; x++){
 		plateau.chemin.bleu[x] = 0;
 		plateau.chemin.rouge[x] = 0;
 		plateau.chemin.vert[x] = 0;
 		plateau.chemin.jaune[x] = 0;
 	}
-	//Affichage
+	/*
+	//Affichage pour tester
+	//Plateau
 	for(x = 0; x < 15; x++){
 		for(y = 0; y < 15; y++){
 			printf("%d", plateau.plateau[x][y]);			
 		}
 		printf("\n");
 	}
+	//Chemins des joueurs
 	for(x = 0; x < 55; x++){
 		printf(COLOR_CYAN "%d" RESET, plateau.chemin.bleu[x]);
 	}
@@ -49,6 +54,7 @@ void initPlateau() {
 		printf(COLOR_YELLOW "%d" RESET, plateau.chemin.jaune[x]);
 	}
 	printf("\n");
+	*/
 	/*
 		On pourra utiliser chaque chemin indépendamment pour chaque joueur et les comparer
 		à chaque fois que le cheval doit avancer pour vérifier la disponibiité d'une case
@@ -59,7 +65,7 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	int couleur_num = 0;
 	int verif[] = { 0,0,0,0 };
 	/*
-	Pour le moment le nombre de joueur est forcément 4
+	//Pour le moment le nombre de joueur est forcément 4
 	do
 	{
 		printf("Nombre de Joueur pour la Partie (1 a 4 joueurs) : ");
@@ -122,8 +128,8 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 		}
 	}
 
-	//On teste
 	/*
+	//On teste
 	for (int i = 0; i < 4; i++) {
 		printf("Joueur %d | NumJoueur %d | Pseudo : %s | Couleur : %d | Nombre de chevaux : %d \n", i + 1, joueur[i].num, joueur[i].pseudo, joueur[i].couleur, joueur[i].nbChevaux);
 		for(int j = 0; j < 4; j++){

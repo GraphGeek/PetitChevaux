@@ -2,9 +2,10 @@
 #define GAME_C_H
 
 int lancerDe();
-void afficherPlateau(char matrice_jeu[][42], joueur *joueur);
 void changerJoueur();
 void sortirCheval();
+void avancerCheval(int *val);
+void mangerCheval();
 void verifValeur(int *val);
 
 #endif

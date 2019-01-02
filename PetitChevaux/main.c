@@ -1,7 +1,7 @@
 ﻿#include "main.h"
 
-int main() {
+void main() {
 	srand(time(NULL));
-	//On initialise le jeu (dans init.c)
+	//On initialise le jeu
 	initJeu();
 }
