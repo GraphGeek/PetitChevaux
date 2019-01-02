@@ -6,8 +6,8 @@ void initJeu() {
 	int nbJoueurs = 4;
 	joueur joueur[4];
 	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
-	//initPlateau();
-	//initJoueurs(&nbJoueurs, joueur);
+	initPlateau();
+	initJoueurs(&nbJoueurs, joueur);
 	tour(joueur);
 }
 
@@ -117,4 +117,14 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 			joueur[i].cheval[j].couleur = couleur_num - 1;
 		}
 	}
+
+	//On teste
+	/*
+	for (int i = 0; i < 4; i++) {
+		printf("Joueur %d | NumJoueur %d | Pseudo : %s | Couleur : %d | Nombre de chevaux : %d \n", i + 1, joueur[i].num, joueur[i].pseudo, joueur[i].couleur, joueur[i].nbChevaux);
+		for(int j = 0; j < 4; j++){
+			printf("Etat cheval : %d | Couleur cheval : %d\n", joueur[i].cheval[j].etat, joueur[i].cheval[j].couleur);
+		}
+	}
+	*/
 }

@@ -43,6 +43,12 @@
 #define CHEVAL			"\u265E"
 
 typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
+
+typedef struct {
+	bool etat;
+	couleur couleur;
+} cheval;
+
 typedef struct {
 	char pseudo[15];
 	int num;
@@ -63,11 +69,6 @@ typedef struct {
 	int plateau[15][15];
 	chemin chemin;
 } plateau;
-
-typedef struct {
-	bool etat;
-	couleur couleur;
-} cheval;
 
 typedef struct {
 	int x;
