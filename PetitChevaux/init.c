@@ -112,5 +112,9 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 
 		//On attribue les chevaux au joueur
 		joueur[i].nbChevaux = 4;
+		for(int j = 0; j < 4; j++){
+			joueur[i].cheval[j].etat = 1;
+			joueur[i].cheval[j].couleur = couleur_num - 1;
+		}
 	}
 }

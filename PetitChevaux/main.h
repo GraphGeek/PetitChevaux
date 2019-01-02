@@ -48,6 +48,7 @@ typedef struct {
 	int num;
 	couleur couleur;
 	int nbChevaux;
+	cheval cheval[4];
 	bool cheminFinal[6];
 } joueur;
 
