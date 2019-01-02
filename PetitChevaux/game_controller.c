@@ -5,19 +5,18 @@
 
 bool victoire;
 
-void lancerDe() {
-	srand(time(NULL));
-	int R = 0;
+int lancerDe() {
+	int r = 0;
 	do { 
-		R = rand() % 7; //Modulo 7 car 6 + 1
-	} while (R == 0);
-	printf("%i\n", R);
+		r = rand() % 7; //Modulo 7 car 6 + 1
+	} while (r == 0);
+	return r;
 }
 
 void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 	int x, y;
 	//Affichage de la matrice caractère par caractère et coloration
-	printf(COLOR_YELLOW "JOUEUR 1" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_CYAN "(%d)     " "JOUEUR 2" RESET, joueur[0].nb_chevaux, joueur[1].nb_chevaux);
+	printf(COLOR_YELLOW "JOUEUR 1" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_CYAN "(%d)     " "JOUEUR 2" RESET, joueur[0].nbChevaux, joueur[1].nbChevaux);
 	printf("\n");
 	printf("\n");
 	for (x = 0; x < 16 + 1; x++) {
@@ -77,13 +76,75 @@ void afficherPlateau(char matrice_jeu[][42], joueur *joueur) {
 		printf("\n");
 	}
 	printf("\n");
-	printf(COLOR_GREEN "JOUEUR 3" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_RED "(%d)     " "JOUEUR 4" RESET, joueur[2].nb_chevaux, joueur[3].nb_chevaux);
+	printf(COLOR_GREEN "JOUEUR 3" "     (%d)" COLOR_WHITE " CHEVAUX " COLOR_RED "(%d)     " "JOUEUR 4" RESET, joueur[2].nbChevaux, joueur[3].nbChevaux);
 	printf("\n");
 };
 
-void tour() {
-	for (int i = 1 ; i <= 4 ; i++) {
-		printf("Joueur %d : ", i);
-		lancerDe();	
+void changerJoueur() {
+	printf("Joueur suivant\n");
+}
+
+void sortirCheval() {
+	printf("Cheval sorti, relancez le dé\n");
+}
+
+void avancerCheval(int *val){
+	printf("Le cheval avance de %d cases\n", val);
+}
+
+void mangerCheval(){
+	printf("Vous avez mangé le cheval de [Insérer joueur]\n");
+}
+
+void verifValeur(int *val){
+	int pos; //A définir : Position du prochain cheval adverse
+	if(val < pos){
+		avancerCheval(val);
+		changerJoueur();
+	} else if(val == pos){
+		mangerCheval();
+		avancerCheval(val);
+		changerJoueur();
+	} else {
+		changerJoueur();
+	}
+}
+
+void tour(joueur *joueur) {
+	bool premierTour = true;
+	bool premiereCaseLibre = true;
+	if(premierTour) {
+		printf("Premier tour de jeu\n");
+		int val = lancerDe();
+		printf("Vous avez obtenu un %d\n", val);
+		if(val == 6){
+			if(premiereCaseLibre) {
+				printf("Vous pouvez sortir un cheval\n");
+				sortirCheval();
+			} else {
+				printf("La première case devant votre écurie est occupée, vous ne pouvez pas sortir de cheval !\n");
+				changerJoueur();
+			}
+		} else {
+			printf("Vous n'avez pas fait 6, vous passez votre tour\n");
+			changerJoueur();
+		}
+	} else {
+		int val = lancerDe();
+		if(val == 6){
+			if(joueur->nbChevaux < 4){
+				int res;
+				do {
+					printf("Voulez-vous sortir un cheval ? Oui (1) Non (0)\n");
+					scanf("%d", &res);
+					if(res != 1 || res != 0){
+						printf("Votre saisie n'est pas correcte\n");
+					}
+				} while (res != 1 || res != 0);
+			} else {
+				verifValeur(val);
+			}
+		verifValeur(val);
+		}
 	}
 };

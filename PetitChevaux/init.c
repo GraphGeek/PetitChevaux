@@ -7,45 +7,55 @@ void initJeu() {
 	joueur joueur[4];
 	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
 	//initPlateau();
-	initJoueurs(&nbJoueurs, joueur);
+	//initJoueurs(&nbJoueurs, joueur);
+	tour(joueur);
 }
 
 void initPlateau() {
-	//Création du plateau sous forme de matrice, les valeurs indiqu�es autour permettent de conna�tre la coresspondance
-	//des cases du plateau avec leurs coordonnées dans la matrice
-
-	//Tableau[Ligne][Colonne]
-
-	//Cases du plateau			  1 2  3  4  5  6  7  8  9  10 11 12 13 1415
-	//Coordonnées matrice  (x)    0 2  5  8  11 14 17 20 23 26 29 32 35 3840   //	y
-
-	char matrice_jeu[17][42] = {
-		{"[][][][][][][][]         [][][][][][][][]"}, //	0
-		{"[][][][][][][][] O  O  0 [][][][][][][][]"}, //	1
-		{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	2
-		{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	3
-		{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	4
-		{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	5
-		{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	6
-		{"0 O  O  O  O  O  O [6] O  O  O  O  O  O O"}, //	7
-		{"O[1][2][3][4][5][6][X][6][5][4][3][2][1]O"}, //	8
-		{"O O  O  O  O  O  O [6] O  O  O  O  O  O 0"}, //	9
-		{"[][][][][][][][] O [2] O [][][][][][][][]"}, //	10
-		{"[][][][][][][][] O [3] O [][][][][][][][]"}, //	11
-		{"[][][][][][][][] O [4] O [][][][][][][][]"}, //	12
-		{"[][][][][][][][] O [5] O [][][][][][][][]"}, //	13
-		{"[][][][][][][][] O [1] O [][][][][][][][]"}, //	14
-		{"[][][][][][][][] 0  O  O [][][][][][][][]"}, //	15
-		{"[][][][][][][][]         [][][][][][][][]"}  //	16
-	};
-	//A voir pour retourner une matrice (malloc)
+	plateau plateau;
+	int x, y;
+	//Initialisation à zéro
+	for(x = 0; x < 15; x++){
+		for(y = 0; y < 15; y++){
+			plateau.plateau[x][y] = 0;
+		}
+	}
+	for(x = 0; x < 55; x++){
+		plateau.chemin.bleu[x] = 0;
+		plateau.chemin.rouge[x] = 0;
+		plateau.chemin.vert[x] = 0;
+		plateau.chemin.jaune[x] = 0;
+	}
+	//Affichage
+	for(x = 0; x < 15; x++){
+		for(y = 0; y < 15; y++){
+			printf("%d", plateau.plateau[x][y]);			
+		}
+		printf("\n");
+	}
+	for(x = 0; x < 55; x++){
+		printf(COLOR_CYAN "%d" RESET, plateau.chemin.bleu[x]);
+	}
+	printf("\n");
+	for(x = 0; x < 55; x++){
+		printf(COLOR_RED "%d" RESET, plateau.chemin.rouge[x]);
+	}
+	printf("\n");
+	for(x = 0; x < 55; x++){
+		printf(COLOR_GREEN "%d" RESET, plateau.chemin.vert[x]);
+	}
+	printf("\n");
+	for(x = 0; x < 55; x++){
+		printf(COLOR_YELLOW "%d" RESET, plateau.chemin.jaune[x]);
+	}
+	printf("\n");
 }
 
 void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	int couleur_num = 0;
 	int verif[] = { 0,0,0,0 };
 	/*
-	Pour le moment le nombre de joueur est forc�ment 4
+	Pour le moment le nombre de joueur est forcément 4
 	do
 	{
 		printf("Nombre de Joueur pour la Partie (1 a 4 joueurs) : ");
@@ -101,13 +111,6 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 		joueur[i].couleur = couleur_num - 1;
 
 		//On attribue les chevaux au joueur
-		joueur[i].nb_chevaux = 4;
+		joueur[i].nbChevaux = 4;
 	}
-
-	//On teste
-	/*
-	for (int i = 0; i < 4; i++) {
-		printf("Joueur %d | NumJoueur %d | Pseudo : %s | Couleur : %d | Nombre de chevaux : %d\n", i + 1, joueur[i].num, joueur[i].pseudo, joueur[i].couleur, joueur[i].nb_chevaux);
-	}
-	*/
 }

@@ -47,15 +47,20 @@ typedef struct {
 	char pseudo[15];
 	int num;
 	couleur couleur;
-	int nb_chevaux;
-	bool chemin_final[6];
+	int nbChevaux;
+	bool cheminFinal[6];
 } joueur;
 
 typedef struct {
+	int bleu[55];
+	int rouge[55];
+	int vert[55];
+	int jaune[55];
+} chemin;
+
+typedef struct {
 	int plateau[15][15];
-	char matrice_jeu[17][42];
-	int chemin[55];
-	//bleu 0->55, rouge 14->55->13, vert 28->55->27, jaune 42->55->41 
+	chemin chemin;
 } plateau;
 
 typedef struct {
@@ -69,6 +74,6 @@ typedef struct {
 } cellule;
 
 void initJeu();
-void tour();
+void tour(joueur *joueur);
 
 #endif
