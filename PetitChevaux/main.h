@@ -76,6 +76,6 @@ typedef struct {
 } cellule;
 
 void initJeu();
-void tour(joueur *joueur);
+void tour(int *nbJoueurs, joueur *joueur);
 
 #endif

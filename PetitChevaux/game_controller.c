@@ -25,7 +25,7 @@ void sortirCheval() {
 }
 
 void avancerCheval(int *val){
-	printf("Le cheval avance de %d cases\n", val);
+	printf("Le cheval avance de %d cases\n", *val);
 	//Gérer le déplacement d'un cheval
 }
 
@@ -36,10 +36,10 @@ void mangerCheval(){
 
 void verifValeur(int *val){
 	int pos; //A définir : Position du prochain cheval adverse
-	if(val < pos){
+	if(*val < pos){
 		avancerCheval(val);
 		changerJoueur();
-	} else if(val == pos){
+	} else if(*val == pos){
 		mangerCheval();
 		avancerCheval(val);
 		changerJoueur();
@@ -48,7 +48,7 @@ void verifValeur(int *val){
 	}
 }
 
-void tour(joueur *joueur) {
+void tour(int *nbJoueurs, joueur *joueur) {
 	//Variables temporaires
 	bool premierTour = true;
 	bool premiereCaseLibre = true;
@@ -82,9 +82,9 @@ void tour(joueur *joueur) {
 					}
 				} while (res != 1 || res != 0);
 			} else {
-				verifValeur(val);
+				verifValeur(&val);
 			}
-		verifValeur(val);
+		verifValeur(&val);
 		}
 	}
 };

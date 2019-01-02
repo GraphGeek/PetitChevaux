@@ -1,6 +1,6 @@
 ﻿#include "main.h"
 
-void main() {
+int main() {
 	srand(time(NULL));
 	//On initialise le jeu
 	initJeu();

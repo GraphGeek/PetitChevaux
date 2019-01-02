@@ -4,29 +4,29 @@
 
 void initJeu() {
 	int nbJoueurs = 4;
-	joueur joueur[4];
+	joueur joueur[nbJoueurs]; //On initialise un tableau de structure de type joueur pour les 4 joueurs
+	plateau plateau; //On initialise un plateau de type plateau
 	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
-	initPlateau();
+	initPlateau(&plateau);
 	initJoueurs(&nbJoueurs, joueur);
-	tour(joueur);
+	tour(&nbJoueurs, joueur);
 }
 
-void initPlateau() {
-	plateau plateau; //On initialise un plateau de type plateau
+void initPlateau(plateau *plateau) {
 	int x, y;
 	//Initialisation à zéro
 	//Initialisation du plateau
 	for(x = 0; x < 15; x++){
 		for(y = 0; y < 15; y++){
-			plateau.plateau[x][y] = 0;
+			plateau->plateau[x][y] = 0;
 		}
 	}
 	//Initialisation des chemins des joueurs
 	for(x = 0; x < 55; x++){
-		plateau.chemin.bleu[x] = 0;
-		plateau.chemin.rouge[x] = 0;
-		plateau.chemin.vert[x] = 0;
-		plateau.chemin.jaune[x] = 0;
+		plateau->chemin.bleu[x] = 0;
+		plateau->chemin.rouge[x] = 0;
+		plateau->chemin.vert[x] = 0;
+		plateau->chemin.jaune[x] = 0;
 	}
 	/*
 	//Affichage pour tester
@@ -123,7 +123,7 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 		//On attribue les chevaux au joueur
 		joueur[i].nbChevaux = 4;
 		for(int j = 0; j < 4; j++){
-			joueur[i].cheval[j].etat = 1;
+			joueur[i].cheval[j].etat = 0;
 			joueur[i].cheval[j].couleur = couleur_num - 1;
 		}
 	}
