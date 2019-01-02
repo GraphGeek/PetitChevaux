@@ -8,7 +8,7 @@ void initJeu() {
 	plateau plateau; //On initialise un plateau de type plateau
 	initPlateau(&plateau);
 	initJoueurs(&nbJoueurs, joueur);
-	tour(&nbJoueurs, joueur);
+	tour(&plateau, &nbJoueurs, joueur);
 }
 
 void initPlateau(plateau *plateau) {
@@ -27,33 +27,33 @@ void initPlateau(plateau *plateau) {
 		plateau->chemin.vert[x] = 0;
 		plateau->chemin.jaune[x] = 0;
 	}
-	/*
+	
 	//Affichage pour tester
 	//Plateau
 	for(x = 0; x < 15; x++){
 		for(y = 0; y < 15; y++){
-			printf("%d", plateau.plateau[x][y]);			
+			printf("%d", plateau->plateau[x][y]);			
 		}
 		printf("\n");
 	}
 	//Chemins des joueurs
 	for(x = 0; x < 55; x++){
-		printf(COLOR_CYAN "%d" RESET, plateau.chemin.bleu[x]);
+		printf(COLOR_CYAN "%d" RESET, plateau->chemin.bleu[x]);
 	}
 	printf("\n");
 	for(x = 0; x < 55; x++){
-		printf(COLOR_RED "%d" RESET, plateau.chemin.rouge[x]);
+		printf(COLOR_RED "%d" RESET, plateau->chemin.rouge[x]);
 	}
 	printf("\n");
 	for(x = 0; x < 55; x++){
-		printf(COLOR_GREEN "%d" RESET, plateau.chemin.vert[x]);
+		printf(COLOR_GREEN "%d" RESET, plateau->chemin.vert[x]);
 	}
 	printf("\n");
 	for(x = 0; x < 55; x++){
-		printf(COLOR_YELLOW "%d" RESET, plateau.chemin.jaune[x]);
+		printf(COLOR_YELLOW "%d" RESET, plateau->chemin.jaune[x]);
 	}
 	printf("\n");
-	*/
+	
 	/*
 		On pourra utiliser chaque chemin indépendamment pour chaque joueur et les comparer
 		à chaque fois que le cheval doit avancer pour vérifier la disponibiité d'une case
@@ -89,16 +89,16 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 		//Enregistrement des couleurs
 		do {
 			if (verif[0] == 0) {
-				printf(COLOR_CYAN "BLEU (1) " RESET);
+				printf(BRIGHT COLOR_CYAN "BLEU (1) " RESET);
 			}
 			if (verif[1] == 0) {
-				printf(COLOR_RED "ROUGE (2) " RESET);
+				printf(BRIGHT COLOR_RED "ROUGE (2) " RESET);
 			}
 			if (verif[2] == 0) {
-				printf(COLOR_GREEN "VERT (3) " RESET);
+				printf(BRIGHT COLOR_GREEN "VERT (3) " RESET);
 			}
 			if (verif[3] == 0) {
-				printf(COLOR_YELLOW "JAUNE (4)" RESET);
+				printf(BRIGHT COLOR_YELLOW "JAUNE (4)" RESET);
 			}
 
 			printf("\n\n");

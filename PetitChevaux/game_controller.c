@@ -16,8 +16,9 @@ void changerJoueur() {
 	//Gérer le changement de joueur à partir de la structure joueur
 }
 
-void sortirCheval() {
+void sortirCheval(joueur *joueur) {
 	printf("Cheval sorti, relancez le dé\n");
+	joueur->statutJeu = 1;
 	//Gérer la sortie d'un cheval
 	//Le joueur doit rejouer
 }
@@ -32,7 +33,35 @@ void mangerCheval(){
 	//Gérer le fait de manger un cheval (son état passe de 1 à 0)
 }
 
-void verifValeur(int *val){
+void verifValeur(plateau *plateau, int *val){
+	/*
+	On vérifie s'il y a des chevaux entre la position du cheval	et la position
+	donnée par la valeur du dé.
+	On récupère l'indice si c'est le cas, et la couleur du cheval correspondant
+	*/
+	int i, color, ind;
+	bool b, r, v, j;
+	bool stop = false;
+	do {
+		if(plateau->chemin.bleu[i] == 1){
+			b = true;
+			color = 0;
+		} else if(plateau->chemin.rouge[i] == 1){
+			r = true;
+			color = 1;
+		} else if(plateau->chemin.vert[i] == 1){
+			v = true;
+			color = 2;
+		} else if(plateau->chemin.jaune[i] == 1){
+			j = true;
+			color = 3;
+		}
+		if(b == true || r == true || v == true || j == true){
+			ind = i;
+			stop = true;
+		}
+		i++;
+	} while(!stop && i < *val);
 	int pos = 0; //A définir : Position du prochain cheval adverse
 	if(*val < pos){
 		avancerCheval(val);
@@ -56,33 +85,37 @@ void verifVictoire(int *nbJoueurs, joueur *joueur){
 	}
 }
 
-void tour(int *nbJoueurs, joueur *joueur) {
+void tour(plateau *plateau, int *nbJoueurs, joueur *joueur) {
 	//Variables temporaires
-	bool premierTour = false;
 	bool premiereCaseLibre = true;
-
+	bool premierTour;
 	for (int i = 0; i < *nbJoueurs; i++) {
+		if(joueur[i].statutJeu == 0){
+			premierTour = true;
+		} else {
+			premierTour = false;
+		}
 		//effacerEcran();
 		//afficherTitre();
-		if(premierTour) {
+		if(premierTour == true) {
 			int val = lancerDe();
 			if(joueur[i].couleur == 0){
-				printf("\nAu tour de " COLOR_CYAN "%s\n\n", joueur[i].pseudo);
-				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+				printf(BRIGHT "\nAu tour de " COLOR_CYAN "%s\n\n" RESET, joueur[i].pseudo);
+				printf(COLOR_CYAN "%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
 			} else if(joueur[i].couleur == 1){
-				printf("\nAu tour de " COLOR_RED "%s\n\n", joueur[i].pseudo);
-				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+				printf(BRIGHT "\nAu tour de " COLOR_RED "%s\n\n" RESET, joueur[i].pseudo);
+				printf(COLOR_RED "%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
 			} else if(joueur[i].couleur == 2){
-				printf("\nAu tour de " COLOR_GREEN "%s\n\n", joueur[i].pseudo);
-				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+				printf(BRIGHT "\nAu tour de " COLOR_GREEN "%s\n\n" RESET, joueur[i].pseudo);
+				printf(COLOR_GREEN "%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
 			} else if(joueur[i].couleur == 3){
-				printf("\nAu tour de " COLOR_YELLOW "%s\n\n", joueur[i].pseudo);				
-				printf("%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
+				printf(BRIGHT "\nAu tour de " COLOR_YELLOW "%s\n\n" RESET, joueur[i].pseudo);				
+				printf(COLOR_YELLOW "%s" RESET ", vous lancez le dé et obtenez un %d\n", joueur[i].pseudo, val);
 			}
 			if(val == 6){
 				if(premiereCaseLibre) {
 					printf("Vous pouvez sortir un cheval\n");
-					sortirCheval();
+					sortirCheval(joueur);
 				} else {
 					printf("La première case devant votre écurie est occupée, vous ne pouvez pas sortir de cheval !\n");
 					changerJoueur();
@@ -104,9 +137,9 @@ void tour(int *nbJoueurs, joueur *joueur) {
 						}
 					} while (res != 1 || res != 0);
 				} else {
-					verifValeur(&val);
+					verifValeur(plateau, &val);
 				}
-			verifValeur(&val);
+			verifValeur(plateau, &val);
 			}
 		}
 	}

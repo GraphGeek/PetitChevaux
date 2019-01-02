@@ -59,6 +59,7 @@ typedef struct {
 	cheval cheval[4];
 	bool cheminFinal[6];
 	bool victoire;
+	bool statutJeu; //0 = Pas de chevaux sortis | 1 = Au moins un cheval en jeu
 } joueur;
 
 typedef struct {
@@ -81,6 +82,6 @@ typedef struct {
 void effacerEcran();
 void afficherTitre();
 void initJeu();
-void tour(int *nbJoueurs, joueur *joueur);
+void tour(plateau *plateau, int *nbJoueurs, joueur *joueur);
 
 #endif
