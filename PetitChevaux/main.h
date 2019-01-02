@@ -42,6 +42,8 @@
 //Emoji Cheval
 #define CHEVAL			"\u265E"
 
+#define ENTER			"\n"
+
 typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
 
 typedef struct {
