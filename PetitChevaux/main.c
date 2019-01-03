@@ -5,7 +5,7 @@ void effacerEcran(){
 }
 
 void afficherTitre(){
-	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX |\n" RESET);
+	printf(BRIGHT "|" CHEVAL " LE JEU DES PETITS CHEVAUX " CHEVAL "|\n" RESET);
 }
 
 int main() {
