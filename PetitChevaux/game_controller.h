@@ -3,10 +3,10 @@
 
 int lancerDe();
 void changerJoueur();
-void sortirCheval(joueur *joueur);
-void avancerCheval(int *val);
+void sortirCheval(plateau *plateau, joueur *joueur);
+void avancerCheval(plateau *plateau, joueur *joueur, int *val);
 void mangerCheval();
-void verifValeur(plateau *plateau, int *val);
+void verifValeur(plateau *plateau, joueur *joueur, int *val);
 void verifVictoire(int *nbJoueurs, joueur *joueur);
 
 #endif

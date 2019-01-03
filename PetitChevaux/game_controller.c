@@ -16,7 +16,7 @@ void changerJoueur() {
 	//Gérer le changement de joueur à partir de la structure joueur
 }
 
-void sortirCheval(joueur *joueur) {
+void sortirCheval(plateau *plateau, joueur *joueur) {
 	printf("Cheval sorti, relancez le dé\n");
 	joueur->statutJeu = 1;
 	if(joueur->couleur == 0){
@@ -35,11 +35,11 @@ void sortirCheval(joueur *joueur) {
 	//Le joueur doit rejouer
 }
 
-void avancerCheval(int *val){
+void avancerCheval(plateau *plateau, joueur *joueur, int *val){
 	int res;
 	bool temp = false;
 	if(joueur->couleur == 0){
-		for(int i , i < 55, i++){
+		for(int i; i < 55; i++){
 			if(plateau->chemin.bleu[i] == 1 && temp == false){
 				do{
 					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
@@ -58,7 +58,7 @@ void avancerCheval(int *val){
 		}
 	}
 	else if(joueur->couleur == 1){
-		for(int i , i < 55, i++){
+		for(int i; i < 55; i++){
 			if(plateau->chemin.rouge[i] == 1 && temp == false){
 				do{
 					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
@@ -77,7 +77,7 @@ void avancerCheval(int *val){
 		}
 	}
 	else if(joueur->couleur == 2){
-		for(int i , i < 55, i++){
+		for(int i; i < 55; i++){
 			if(plateau->chemin.vert[i] == 1 && temp == false){
 				do{
 					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
@@ -96,7 +96,7 @@ void avancerCheval(int *val){
 		}
 	}
 	else if(joueur->couleur == 3){
-		for(int i , i < 55, i++){
+		for(int i; i < 55; i++){
 			if(plateau->chemin.jaune[i] == 1 && temp == false){
 				do{
 					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
@@ -122,7 +122,7 @@ void mangerCheval(){
 	//Gérer le fait de manger un cheval (son état passe de 1 à 0)
 }
 
-void verifValeur(plateau *plateau, int *val){
+void verifValeur(plateau *plateau, joueur *joueur, int *val){
 	/*
 	On vérifie s'il y a des chevaux entre la position du cheval	et la position
 	donnée par la valeur du dé.
@@ -153,11 +153,11 @@ void verifValeur(plateau *plateau, int *val){
 	} while(!stop && i < *val);
 	int pos = 0; //A définir : Position du prochain cheval adverse
 	if(*val < pos){
-		avancerCheval(val);
+		avancerCheval(plateau, joueur, val);
 		changerJoueur();
 	} else if(*val == pos){
 		mangerCheval();
-		avancerCheval(val);
+		avancerCheval(plateau, joueur, val);
 		changerJoueur();
 	} else {
 		changerJoueur();
@@ -204,7 +204,7 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur) {
 			if(val == 6){
 				if(premiereCaseLibre) {
 					printf("Vous pouvez sortir un cheval\n");
-					sortirCheval(joueur);
+					sortirCheval(plateau, joueur);
 				} else {
 					printf("La première case devant votre écurie est occupée, vous ne pouvez pas sortir de cheval !\n");
 					changerJoueur();
@@ -226,9 +226,9 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur) {
 						}
 					} while (res != 1 || res != 0);
 				} else {
-					verifValeur(plateau, &val);
+					verifValeur(plateau, joueur, &val);
 				}
-			verifValeur(plateau, &val);
+			verifValeur(plateau, joueur, &val);
 			}
 		}
 	}
