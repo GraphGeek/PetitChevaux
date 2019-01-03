@@ -19,6 +19,18 @@ void changerJoueur() {
 void sortirCheval(joueur *joueur) {
 	printf("Cheval sorti, relancez le dé\n");
 	joueur->statutJeu = 1;
+	if(joueur->couleur == 0){
+		plateau->chemin.bleu[0] = 1;
+	}
+	else if(joueur->couleur == 1){
+		plateau->chemin.rouge[0] = 1;
+	}
+	else if(joueur->couleur == 2){
+		plateau->chemin.vert[0] = 1;
+	}
+	else if(joueur->couleur == 3){
+		plateau->chemin.jaune[0] = 1;
+	}
 	//Gérer la sortie d'un cheval
 	//Le joueur doit rejouer
 }
