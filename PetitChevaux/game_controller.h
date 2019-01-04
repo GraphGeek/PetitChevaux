@@ -12,4 +12,7 @@ void verifVictoire(int *nbJoueurs, joueur *joueur);
 void afficherTour(joueur *joueur, int *indJoueur);
 void afficherValeuDe(joueur *joueur, int *indJoueur, int *val);
 
+/* DEBUG */
+void debugPlateau(plateau *plateau);
+
 #endif

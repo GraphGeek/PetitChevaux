@@ -12,6 +12,7 @@ int lancerDe() {
 }
 
 void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
+	debugPlateau(plateau);
 	if(*indJoueur >= 0 && *indJoueur <= 2){
 		(*indJoueur)++;
 	}
@@ -38,7 +39,7 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	//On identifie le joueur en cours par sa couleur
 	//On vérifie que la sortie de l'écurie est libre
 	bool sortieLibre;
-	if(joueur->couleur == 0){
+	if(*indJoueur == 0){
 		if(plateau->chemin.bleu[0] == 0){
 			sortieLibre = true;
 			plateau->chemin.bleu[0] = 1;
@@ -47,7 +48,7 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 			sortieLibre = false;
 		}
 	}
-	else if(joueur->couleur == 1){
+	else if(*indJoueur == 1){
 		if(plateau->chemin.bleu[0] == 0){
 			sortieLibre = true;
 			plateau->chemin.rouge[0] = 1;
@@ -56,7 +57,7 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 			sortieLibre = false;
 		}
 	}
-	else if(joueur->couleur == 2){
+	else if(*indJoueur == 2){
 		if(plateau->chemin.bleu[0] == 0){
 			sortieLibre = true;
 			plateau->chemin.vert[0] = 1;
@@ -65,7 +66,7 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 			sortieLibre = false;
 		}
 	}
-	else if(joueur->couleur == 3){
+	else if(*indJoueur == 3){
 		if(plateau->chemin.bleu[0] == 0){
 			sortieLibre = true;
 			plateau->chemin.jaune[0] = 1;
@@ -85,7 +86,6 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	} else {
 		//Le cheval est bloqué dans l'écurie
 		joueur[*indJoueur].statutJeu = 0;
-		mangerCheval();
 	}
 }
 
@@ -213,7 +213,7 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
 	afficherTitre();
 	afficherTour(joueur, indJoueur);
 	bool premierTour;
-	if(joueur->statutJeu == 0){
+	if(joueur[*indJoueur].statutJeu == 0){
 		premierTour = true;
 	} else {
 		premierTour = false;
@@ -234,8 +234,19 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
 		afficherValeurDe(joueur, indJoueur, &val);		
 		if(val == 6){
 			if(joueur[*indJoueur].nbChevaux < 4){
-				printf("TEST : Il faut sortir un cheval\n");
-				sortirCheval(plateau, nbJoueurs, joueur, indJoueur);
+				int res;
+				printf("Voulez-vous sortir un cheval de l'écurie ? Oui (1) Non (0)");
+				scanf("%d", &res);
+				if(res != 1 || res != 0){
+					printf("Votre saisie n'est pas correcte\n");
+				}
+				else if(res == 1){
+					sortirCheval(plateau, nbJoueurs, joueur, indJoueur);
+				}
+				else {
+					printf("TEST : Il faut avancer un cheval (== 6)\n");
+					avancerCheval(plateau, nbJoueurs, joueur, &val, indJoueur);
+				}
 			}
 			else {
 				printf("TEST : Il faut avancer un cheval (== 6)\n");
@@ -244,9 +255,41 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
 		}
 		else {
 			printf("TEST : Il faut avancer un cheval (!= 6)\n");			
-			//avancerCheval(plateau, nbJoueurs, joueur, &val, indJoueur);
+			avancerCheval(plateau, nbJoueurs, joueur, &val, indJoueur);
 			//ERREUR DE SEGMENTATION ICI -> A VOIR
-			changerJoueur(plateau, nbJoueurs, joueur, indJoueur);
 		}
 	}
 };
+
+/* DEBUG */
+
+void debugPlateau(plateau *plateau){
+	int x;
+	//int y;
+	printf("\n\nDEBUG PLATEAU\n");
+	for(x = 0; x < 15; x++){
+		/*
+		for(y = 0; y < 15; y++){
+			printf("%d", plateau->plateau[x][y]);			
+		}
+		printf("\n");
+		*/
+	}
+	//Chemins des joueurs
+	for(x = 0; x < 55; x++){
+		printf(COLOR_CYAN "%d" RESET, plateau->chemin.bleu[x]);
+	}
+	printf("\n");
+	for(x = 0; x < 55; x++){
+		printf(COLOR_RED "%d" RESET, plateau->chemin.rouge[x]);
+	}
+	printf("\n");
+	for(x = 0; x < 55; x++){
+		printf(COLOR_GREEN "%d" RESET, plateau->chemin.vert[x]);
+	}
+	printf("\n");
+	for(x = 0; x < 55; x++){
+		printf(COLOR_YELLOW "%d" RESET, plateau->chemin.jaune[x]);
+	}
+	printf("\n");
+}
