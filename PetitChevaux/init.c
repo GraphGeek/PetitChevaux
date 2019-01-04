@@ -3,6 +3,7 @@
 #include "init.h"
 
 void initJeu() {
+	effacerEcran();
 	int nbJoueurs = 4;
 	joueur joueur[nbJoueurs]; //On initialise un tableau de structure de type joueur pour les 4 joueurs
 	plateau plateau; //On initialise un plateau de type plateau
@@ -28,7 +29,7 @@ void initPlateau(plateau *plateau) {
 		plateau->chemin.vert[x] = 0;
 		plateau->chemin.jaune[x] = 0;
 	}
-	
+	/*
 	//Affichage pour tester
 	//Plateau
 	for(x = 0; x < 15; x++){
@@ -54,7 +55,7 @@ void initPlateau(plateau *plateau) {
 		printf(COLOR_YELLOW "%d" RESET, plateau->chemin.jaune[x]);
 	}
 	printf("\n");
-	
+	*/
 	/*
 		On pourra utiliser chaque chemin indépendamment pour chaque joueur et les comparer
 		à chaque fois que le cheval doit avancer pour vérifier la disponibiité d'une case
@@ -76,7 +77,6 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	} while ((*nbJoueurs < 0) || (*nbJoueurs > 4));
 	*/
 	for (int i = 0; i < *nbJoueurs; i++) {
-		effacerEcran();
 		afficherTitre();
 		//Enregistrement du pseudo
 		printf("\n");
@@ -130,6 +130,7 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 		}
 
 		joueur[i].victoire = false;
+		effacerEcran();
 	}
 
 	/*
