@@ -213,7 +213,7 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
 	afficherTitre();
 	afficherTour(joueur, indJoueur);
 	bool premierTour;
-	if(joueur[*indJoueur].statutJeu == 0){
+	if(joueur->statutJeu == 0){
 		premierTour = true;
 	} else {
 		premierTour = false;
