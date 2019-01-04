@@ -8,7 +8,8 @@ void initJeu() {
 	plateau plateau; //On initialise un plateau de type plateau
 	initPlateau(&plateau);
 	initJoueurs(&nbJoueurs, joueur);
-	tour(&plateau, &nbJoueurs, joueur);
+	int i  = 0; //Premier joueur (à définir, le premier par défaut)
+	tour(&plateau, &nbJoueurs, joueur, &i);
 }
 
 void initPlateau(plateau *plateau) {

@@ -84,6 +84,6 @@ typedef struct {
 void effacerEcran();
 void afficherTitre();
 void initJeu();
-void tour(plateau *plateau, int *nbJoueurs, joueur *joueur);
+void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *i);
 
 #endif
