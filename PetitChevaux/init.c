@@ -9,8 +9,12 @@ void initJeu() {
 	plateau plateau; //On initialise un plateau de type plateau
 	initPlateau(&plateau);
 	initJoueurs(&nbJoueurs, joueur);
-	int indJoueur = 0; //Premier joueur (à définir, le premier par défaut)
+	int indJoueur = premierJoueur();
 	tour(&plateau, &nbJoueurs, joueur, &indJoueur);
+}
+
+int premierJoueur() {
+	return(rand() % 4); //Modulo 4 car 3 + 1 (Incluant 0)
 }
 
 void initPlateau(plateau *plateau) {
@@ -29,53 +33,11 @@ void initPlateau(plateau *plateau) {
 		plateau->chemin.vert[x] = 0;
 		plateau->chemin.jaune[x] = 0;
 	}
-	/*
-	//Affichage pour tester
-	//Plateau
-	for(x = 0; x < 15; x++){
-		for(y = 0; y < 15; y++){
-			printf("%d", plateau->plateau[x][y]);			
-		}
-		printf("\n");
-	}
-	//Chemins des joueurs
-	for(x = 0; x < 55; x++){
-		printf(COLOR_CYAN "%d" RESET, plateau->chemin.bleu[x]);
-	}
-	printf("\n");
-	for(x = 0; x < 55; x++){
-		printf(COLOR_RED "%d" RESET, plateau->chemin.rouge[x]);
-	}
-	printf("\n");
-	for(x = 0; x < 55; x++){
-		printf(COLOR_GREEN "%d" RESET, plateau->chemin.vert[x]);
-	}
-	printf("\n");
-	for(x = 0; x < 55; x++){
-		printf(COLOR_YELLOW "%d" RESET, plateau->chemin.jaune[x]);
-	}
-	printf("\n");
-	*/
-	/*
-		On pourra utiliser chaque chemin indépendamment pour chaque joueur et les comparer
-		à chaque fois que le cheval doit avancer pour vérifier la disponibiité d'une case
-	*/
 }
 
 void initJoueurs(int *nbJoueurs, joueur *joueur) {
 	int couleur_num = 0;
 	int verif[] = { 0,0,0,0 };
-	/*
-	//Pour le moment le nombre de joueur est forcément 4
-	do
-	{
-		printf("Nombre de Joueur pour la Partie (1 a 4 joueurs) : ");
-		scanf("%d", nbJoueurs);
-		if ((*nbJoueurs < 0) || (*nbJoueurs > 4)) {
-			printf("Veuillez choisir un nombre de joueurs compris entre 1 et 4 !\n");
-		}
-	} while ((*nbJoueurs < 0) || (*nbJoueurs > 4));
-	*/
 	for (int i = 0; i < *nbJoueurs; i++) {
 		afficherTitre();
 		//Enregistrement du pseudo
@@ -132,14 +94,4 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 		joueur[i].victoire = false;
 		effacerEcran();
 	}
-
-	/*
-	//On teste
-	for (int i = 0; i < 4; i++) {
-		printf("Joueur %d | NumJoueur %d | Pseudo : %s | Couleur : %d | Nombre de chevaux : %d \n", i + 1, joueur[i].num, joueur[i].pseudo, joueur[i].couleur, joueur[i].nbChevaux);
-		for(int j = 0; j < 4; j++){
-			printf("Etat cheval : %d | Couleur cheval : %d\n", joueur[i].cheval[j].etat, joueur[i].cheval[j].couleur);
-		}
-	}
-	*/
 }
