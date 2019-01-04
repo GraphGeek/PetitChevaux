@@ -12,27 +12,16 @@ int lancerDe() {
 }
 
 void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
-	debugPlateau(plateau);
 	if(*indJoueur >= 0 && *indJoueur <= 2){
 		(*indJoueur)++;
 	}
 	else if(*indJoueur == 3){
 		*indJoueur = 0;
 	}
-	bool wait = false;
-	char res;
-	do {
-		printf("\nEntrée pour passer au tour suivant (Il faut parfois le faire plusieurs fois [A revoir])\n");
-		scanf("%c", &res);
-		getchar();
-		if(getchar() != '\n'){
-			printf("Votre saisie n'est pas correcte\n");
-		}
-		else {
-			wait = true;
-			tour(plateau, nbJoueurs, joueur, indJoueur);
-		}
-	} while(!wait);
+	enterToContinue();
+	effacerEcran();
+	afficherTitre();
+	tour(plateau, nbJoueurs, joueur, indJoueur);
 }
 
 void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
@@ -41,11 +30,14 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	int typeCase;
 	//Si le joueur en cours est bleu
 	if(joueur[*indJoueur].couleur == 0){
-		if(plateau->chemin.rouge[0] == 1 || plateau->chemin.vert[0] == 1 || plateau->chemin.jaune[0] == 1){
+		/*
+		if(){
 			//Ici un cheval d'une autre couleur est présent sur la case de départ
 			typeCase = 1;
 		}
-		else if(plateau->chemin.bleu[0] == 1){
+		else
+		*/
+		if(plateau->chemin.bleu[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
 			typeCase = 2;
 		}
@@ -58,11 +50,14 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 	//Si le joueur en cours est rouge
 	if(joueur[*indJoueur].couleur == 1){
-		if(plateau->chemin.bleu[0] == 1 || plateau->chemin.vert[0] == 1 || plateau->chemin.jaune[0] == 1){
+		/*
+		if(){
 			//Ici un cheval d'une autre couleur est présent sur la case de départ
 			typeCase = 1;
 		}
-		else if(plateau->chemin.rouge[0] == 1){
+		else
+		*/
+		if(plateau->chemin.rouge[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
 			typeCase = 2;
 		}
@@ -75,11 +70,14 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 	//Si le joueur en cours est vert
 	if(joueur[*indJoueur].couleur == 2){
-		if(plateau->chemin.rouge[0] == 1 || plateau->chemin.bleu[0] == 1 || plateau->chemin.jaune[0] == 1){
+		/*
+		if(){
 			//Ici un cheval d'une autre couleur est présent sur la case de départ
 			typeCase = 1;
 		}
-		else if(plateau->chemin.vert[0] == 1){
+		else
+		*/
+		 if(plateau->chemin.vert[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
 			typeCase = 2;
 		}
@@ -92,11 +90,14 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 	//Si le joueur en cours est jaune
 	if(joueur[*indJoueur].couleur == 3){
-		if(plateau->chemin.rouge[0] == 1 || plateau->chemin.vert[0] == 1 || plateau->chemin.bleu[0] == 1){
+		/*
+		if(){
 			//Ici un cheval d'une autre couleur est présent sur la case de départ
 			typeCase = 1;
 		}
-		else if(plateau->chemin.jaune[0] == 1){
+		else
+		*/
+		if(plateau->chemin.jaune[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
 			typeCase = 2;
 		}
@@ -110,6 +111,7 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	//0 = Vide | 1 = Cheval d'une autre couleur | 2 = Cheval de la même couleur
 	if(typeCase == 0){
 		joueur[*indJoueur].statutJeu = 1; //Le joueur entre dans le jeu
+		joueur[*indJoueur].nbChevaux--;
 		printf("Votre cheval est sorti de l'écurie, relancez le dé\n");
 		printf("\n");
 		//On relance un tour de jeu
@@ -117,8 +119,7 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 	else if(typeCase == 1){
 		int indCheval = 0; //Il faudra récupérer le numéro du cheval correspondant
-		int coulCheval = 0; //Il faudra récupérer le numéro de couleur du cheval correspondant
-		mangerCheval(joueur, indJoueur, &indCheval, &coulCheval);
+		mangerCheval(joueur, indJoueur, &indCheval);
 	}
 	else if(typeCase == 2){
 		printf("Votre cheval est bloqué dans l'écurie, vous ne pouvez pas manger un cheval de même couleur !\n");
@@ -130,87 +131,109 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 }
 
-void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval){
+//Fonction à revoir
+void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval){
 	printf("Vous avez mangé le cheval [Insérer numéro] de [%s]\n", joueur[*indJoueur].pseudo);
 	//Gérer le fait de manger un cheval (son état passe de 1 à 0)
 	joueur[*indJoueur].cheval[*indCheval].etat = 0;
 }
 
-int demanderDeplacement(int *indJoueur){
+int demanderDeplacement(int *i, int *val){
 	int res;
-	printf("Voulez vous déplacer le cheval à la case %d ? Oui (1) Non (0)", *indJoueur);
+	printf("Voulez vous déplacer le cheval à la case %d ? Oui (1) Non (0) : ", *i + *val);
 	scanf("%d", &res);
-	if(res != 1 || res != 0){
-		printf("Votre saisie n'est pas correcte\n");
-	}
 	return res;
 }
 
+//Version plus compacte de la fonction avancerChevak envisageable (idée en tête)
 void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, int *indJoueur){
 	int res;
-	bool temp = false;
+	bool tmp = false;
 	//Si le joueur est Bleu
 	if(joueur[*indJoueur].couleur == 0){
-		for(int i; i < 55; i++){
-			if(plateau->chemin.bleu[i] == 1 && temp == false){
+		for(int i = 0; i < 55; i++){
+			if(plateau->chemin.bleu[i] == 1 && tmp == false){
 				do {
-					res = demanderDeplacement(&i);
+					res = demanderDeplacement(&i, val);
 					if(res == 1){
 						plateau->chemin.bleu[i] = 0;
 						plateau->chemin.bleu[i + *val] = 1;
-						temp = true;
+						tmp = true;
 						printf("Le cheval avance de %d cases\n", *val);
 					}
-					//Sinon il faut changer de joueur ?
-				} while(res != 1 || res != 0);
+					else if(res == 0){
+						//On fait quoi ici ?
+					}
+					else {
+						//Et ici ?
+					}
+				} while(res != 1 && res != 0);
 			}
 		}
 	}
 	//Si le joueur est Rouge
 	else if(joueur[*indJoueur].couleur == 1){
-		for(int i; i < 55; i++){
-			if(plateau->chemin.rouge[i] == 1 && temp == false){
-				do{
-					res = demanderDeplacement(&i);
+		for(int i = 0; i < 55; i++){
+			if(plateau->chemin.rouge[i] == 1 && tmp == false){
+				do {
+					res = demanderDeplacement(&i, val);
 					if(res == 1){
 						plateau->chemin.rouge[i] = 0;
 						plateau->chemin.rouge[i + *val] = 1;
-						temp = true;
+						tmp = true;
 						printf("Le cheval avance de %d cases\n", *val);
 					}
-				}while(res != 1 || res != 0);
+					else if(res == 0){
+						//On fait quoi ici ?
+					}
+					else {
+						//Et ici ?
+					}
+				} while(res != 1 && res != 0);
 			}
 		}
 	}
 	//Si le joueur est Vert
 	else if(joueur[*indJoueur].couleur == 2){
-		for(int i; i < 55; i++){
-			if(plateau->chemin.vert[i] == 1 && temp == false){
-				do{
-					res = demanderDeplacement(&i);
+		for(int i = 0; i < 55; i++){
+			if(plateau->chemin.vert[i] == 1 && tmp == false){
+				do {
+					res = demanderDeplacement(&i, val);
 					if(res == 1){
 						plateau->chemin.vert[i] = 0;
 						plateau->chemin.vert[i + *val] = 1;
-						temp = true;
+						tmp = true;
 						printf("Le cheval avance de %d cases\n", *val);
 					}
-				}while(res != 1 || res != 0);
+					else if(res == 0){
+						//On fait quoi ici ?
+					}
+					else {
+						//Et ici ?
+					}
+				} while(res != 1 && res != 0);
 			}
 		}
 	}
 	//Si le joueur est Jaune
 	else if(joueur[*indJoueur].couleur == 3){
-		for(int i; i < 55; i++){
-			if(plateau->chemin.jaune[i] == 1 && temp == false){
-				do{
-					res = demanderDeplacement(&i);
+		for(int i = 0; i < 55; i++){
+			if(plateau->chemin.jaune[i] == 1 && tmp == false){
+				do {
+					res = demanderDeplacement(&i, val);
 					if(res == 1){
 						plateau->chemin.jaune[i] = 0;
 						plateau->chemin.jaune[i + *val] = 1;
-						temp = true;
+						tmp = true;
 						printf("Le cheval avance de %d cases\n", *val);
 					}
-				}while(res != 1 || res != 0);
+					else if(res == 0){
+						//On fait quoi ici ?
+					}
+					else {
+						//Et ici ?
+					}
+				} while(res != 1 && res != 0);
 			}
 		}
 	}
@@ -254,17 +277,9 @@ void afficherValeurDe(joueur *joueur, int *indJoueur, int *val){
 }
 
 void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
-	effacerEcran();
-	afficherTitre();
-	printf("\n%s commence la partie !\n", joueur[*indJoueur].pseudo);
+	debugPlateau(plateau);
 	afficherTour(joueur, indJoueur);
-	bool premierTour;
-	if(joueur->statutJeu == 0){
-		premierTour = true;
-	} else {
-		premierTour = false;
-	}
-	if(premierTour == true) {
+	if(joueur[*indJoueur].statutJeu == 0) {
 		int val = lancerDe();
 		afficherValeurDe(joueur, indJoueur, &val);
 		if(val == 6){
@@ -281,28 +296,25 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
 		if(val == 6){
 			if(joueur[*indJoueur].nbChevaux < 4){
 				int res;
-				printf("Voulez-vous sortir un cheval de l'écurie ? Oui (1) Non (0)");
+				printf("Voulez-vous sortir un cheval de l'écurie ? Oui (1) Non (0) : ");
 				scanf("%d", &res);
-				if(res != 1 || res != 0){
+				if(res != 1 && res != 0){
 					printf("Votre saisie n'est pas correcte\n");
 				}
 				else if(res == 1){
 					sortirCheval(plateau, nbJoueurs, joueur, indJoueur);
+					//Penser à ajouter la vérification de superposition
 				}
 				else {
-					printf("TEST : Il faut avancer un cheval (== 6)\n");
 					avancerCheval(plateau, nbJoueurs, joueur, &val, indJoueur);
 				}
 			}
 			else {
-				printf("TEST : Il faut avancer un cheval (== 6)\n");
 				avancerCheval(plateau, nbJoueurs, joueur, &val, indJoueur);
 			}
 		}
 		else {
-			printf("TEST : Il faut avancer un cheval (!= 6)\n");			
 			avancerCheval(plateau, nbJoueurs, joueur, &val, indJoueur);
-			//ERREUR DE SEGMENTATION ICI -> A VOIR
 		}
 	}
 };

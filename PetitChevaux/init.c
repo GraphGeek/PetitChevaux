@@ -10,6 +10,9 @@ void initJeu() {
 	initPlateau(&plateau);
 	initJoueurs(&nbJoueurs, joueur);
 	int indJoueur = premierJoueur();
+	effacerEcran();
+	afficherTitre();
+	printf("\n%s commence la partie !\n", joueur[indJoueur].pseudo);
 	tour(&plateau, &nbJoueurs, joueur, &indJoueur);
 }
 

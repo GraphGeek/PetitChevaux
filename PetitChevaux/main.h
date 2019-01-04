@@ -82,6 +82,7 @@ typedef struct {
 
 void effacerEcran();
 void afficherTitre();
+void enterToContinue();
 void initJeu();
 void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 

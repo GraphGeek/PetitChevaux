@@ -2,12 +2,12 @@
 #define GAME_C_H
 
 int lancerDe();
-int demanderDeplacement(int *indJoueur);
+int demanderDeplacement(int *i, int *val);
 
 void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, int *indJoueur);
-void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval);
+void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval);
 void verifVictoire(int *nbJoueurs, joueur *joueur);
 void afficherTour(joueur *joueur, int *indJoueur);
 void afficherValeuDe(joueur *joueur, int *indJoueur, int *val);
