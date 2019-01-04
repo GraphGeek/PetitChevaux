@@ -149,6 +149,7 @@ int demanderDeplacement(int *indJoueur){
 void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, int *indJoueur){
 	int res;
 	bool temp = false;
+	//Si le joueur est Bleu
 	if(joueur[*indJoueur].couleur == 0){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.bleu[i] == 1 && temp == false){
@@ -165,6 +166,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 			}
 		}
 	}
+	//Si le joueur est Rouge
 	else if(joueur[*indJoueur].couleur == 1){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.rouge[i] == 1 && temp == false){
@@ -180,6 +182,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 			}
 		}
 	}
+	//Si le joueur est Vert
 	else if(joueur[*indJoueur].couleur == 2){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.vert[i] == 1 && temp == false){
@@ -195,6 +198,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 			}
 		}
 	}
+	//Si le joueur est Jaune
 	else if(joueur[*indJoueur].couleur == 3){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.jaune[i] == 1 && temp == false){
