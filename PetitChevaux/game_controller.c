@@ -35,25 +35,32 @@ void sortirCheval(plateau *plateau, joueur *joueur) {
 	//Le joueur doit rejouer
 }
 
+int demanderDeplacement(int *i){
+	int res;
+	printf("Voulez vous déplacer le cheval à la case %d ? Oui (1) Non (0)", *i);
+	scanf("%d", &res);
+	if(res != 1 || res != 0){
+		printf("Votre saisie n'est pas correcte\n");
+	}
+	return res;
+}
+
 void avancerCheval(plateau *plateau, joueur *joueur, int *val){
 	int res;
 	bool temp = false;
 	if(joueur->couleur == 0){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.bleu[i] == 1 && temp == false){
-				do{
-					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
-					scanf("%d", &res);
-					if(res != 1 || res != 0){
-						printf("Votre saisie n'est pas correcte\n");
-					}
-					else if(res == 1){
+				do {
+					res = demanderDeplacement(&i);
+					if(res == 1){
 						plateau->chemin.bleu[i] = 0;
 						plateau->chemin.bleu[i + *val] = 1;
 						temp = true;
 						printf("Le cheval avance de %d cases\n", *val);
 					}
-				}while(res != 1 || res != 0);
+					//Sinon il faut changer de joueur ?
+				} while(res != 1 || res != 0);
 			}
 		}
 	}
@@ -61,12 +68,8 @@ void avancerCheval(plateau *plateau, joueur *joueur, int *val){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.rouge[i] == 1 && temp == false){
 				do{
-					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
-					scanf("%d", &res);
-					if(res != 1 || res != 0){
-						printf("Votre saisie n'est pas correcte\n");
-					}
-					else if(res == 1){
+					res = demanderDeplacement(&i);
+					if(res == 1){
 						plateau->chemin.rouge[i] = 0;
 						plateau->chemin.rouge[i + *val] = 1;
 						temp = true;
@@ -80,12 +83,8 @@ void avancerCheval(plateau *plateau, joueur *joueur, int *val){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.vert[i] == 1 && temp == false){
 				do{
-					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
-					scanf("%d", &res);
-					if(res != 1 || res != 0){
-						printf("Votre saisie n'est pas correcte\n");
-					}
-					else if(res == 1){
+					res = demanderDeplacement(&i);
+					if(res == 1){
 						plateau->chemin.vert[i] = 0;
 						plateau->chemin.vert[i + *val] = 1;
 						temp = true;
@@ -99,12 +98,8 @@ void avancerCheval(plateau *plateau, joueur *joueur, int *val){
 		for(int i; i < 55; i++){
 			if(plateau->chemin.jaune[i] == 1 && temp == false){
 				do{
-					printf("voulez vous deplacer le cheval à la case %d ? oui(1) non(0)", i);
-					scanf("%d", &res);
-					if(res != 1 || res != 0){
-						printf("Votre saisie n'est pas correcte\n");
-					}
-					else if(res == 1){
+					res = demanderDeplacement(&i);
+					if(res == 1){
 						plateau->chemin.jaune[i] = 0;
 						plateau->chemin.jaune[i + *val] = 1;
 						temp = true;
@@ -114,7 +109,6 @@ void avancerCheval(plateau *plateau, joueur *joueur, int *val){
 			}
 		}
 	}
-	//Gérer le déplacement d'un cheval
 }
 
 void mangerCheval(){

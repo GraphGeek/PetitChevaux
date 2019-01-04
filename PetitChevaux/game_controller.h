@@ -4,6 +4,7 @@
 int lancerDe();
 void changerJoueur();
 void sortirCheval(plateau *plateau, joueur *joueur);
+int demanderDeplacement(int *i);
 void avancerCheval(plateau *plateau, joueur *joueur, int *val);
 void mangerCheval();
 void verifValeur(plateau *plateau, joueur *joueur, int *val);

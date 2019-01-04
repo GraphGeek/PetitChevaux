@@ -49,11 +49,13 @@ typedef enum {BLEU, ROUGE, VERT, JAUNE} couleur;
 typedef struct {
 	bool etat;
 	couleur couleur;
+	int pos; //Position du cheval sur un chemin (0 à 55) | -1 = Pas sur le chemin
 } cheval;
 
 typedef struct {
 	char pseudo[15];
 	int num;
+	int pos; //Position du joueur sur un chemin (0 à 55) | -1 = Pas sur le chemin
 	couleur couleur;
 	int nbChevaux;
 	cheval cheval[4];
