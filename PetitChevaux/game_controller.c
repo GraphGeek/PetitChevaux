@@ -21,8 +21,9 @@ void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJou
 	bool wait = false;
 	char res;
 	do {
-		printf("\nEntrée pour passer au tour suivant\n");
+		printf("\nEntrée pour passer au tour suivant (Il faut parfois le faire plusieurs fois [A revoir])\n");
 		scanf("%c", &res);
+		getchar();
 		if(getchar() != '\n'){
 			printf("Votre saisie n'est pas correcte\n");
 		}
