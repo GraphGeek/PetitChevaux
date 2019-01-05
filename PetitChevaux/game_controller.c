@@ -176,7 +176,6 @@ void effectuerManger(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJ
 	if(joueur[*numJoueur].nbChevaux == 4){
 		joueur[*numJoueur].statutJeu = 0;
 	}
-	changerJoueur(plateau, nbJoueurs, joueur, indJoueur);
 }
 
 void mangerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval, int *i, int *val){
@@ -198,11 +197,12 @@ void mangerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 			numJoueur = 0;
 			effectuerManger(plateau, nbJoueurs, joueur, indJoueur, indJoueur, coulCheval, i, val, &numJoueur);
 		}
+		printf("Vous avez mangé le cheval et pris sa place\n");
 	}
 	else {
 		printf("Vous ne pouvez pas manger votre popre cheval !\n");
 	}
-
+	changerJoueur(plateau, nbJoueurs, joueur, indJoueur);
 }
 
 void demanderDeplacement(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur, int *i, int *val, int *couleur, bool *tmp){
@@ -537,7 +537,8 @@ void afficherValeurDe(joueur *joueur, int *indJoueur, int *val){
 }
 
 void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
-	debugPlateau(plateau);
+	//debugPlateau(plateau);
+	affichPlateau(plateau);
 	afficherTour(joueur, indJoueur);
 	if(joueur[*indJoueur].statutJeu == 0) {
 		int val = lancerDe();
@@ -579,20 +580,35 @@ void tour(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur) {
 	}
 };
 
+void affichPlateau(plateau *plateau){
+	printf("\n");
+	printf("|");
+	for(int x = 0; x < 55; x++){
+		if(plateau->chemin.bleu[x] == 1){
+			printf(COLOR_CYAN CHEVAL "|" RESET);
+		}
+		else if(plateau->chemin.rouge[x] == 1){
+			printf(COLOR_RED CHEVAL RESET "|");
+		}
+		else if(plateau->chemin.vert[x] == 1){
+			printf(COLOR_GREEN CHEVAL RESET"|");
+		}
+		else if(plateau->chemin.jaune[x] == 1){
+			printf(COLOR_YELLOW CHEVAL RESET"|");
+		}
+		else {
+			printf("o|");
+		}
+	}
+	printf("\n");
+}
+
 /* DEBUG */
 
 void debugPlateau(plateau *plateau){
 	int x;
 	//int y;
-	printf("\n\nDEBUG PLATEAU\n");
-	for(x = 0; x < 15; x++){
-		/*
-		for(y = 0; y < 15; y++){
-			printf("%d", plateau->plateau[x][y]);			
-		}
-		printf("\n");
-		*/
-	}
+	printf("\nDEBUG PLATEAU\n");
 	//Chemins des joueurs
 	printf(COLOR_CYAN "|" RESET);
 	for(x = 0; x < 55; x++){

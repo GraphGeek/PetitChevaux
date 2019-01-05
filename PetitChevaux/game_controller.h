@@ -14,6 +14,7 @@ void mangerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 void verifVictoire(int *nbJoueurs, joueur *joueur);
 void afficherTour(joueur *joueur, int *indJoueur);
 void afficherValeuDe(joueur *joueur, int *indJoueur, int *val);
+void affichPlateau(plateau *plateau);
 
 /* DEBUG */
 void debugPlateau(plateau *plateau);
