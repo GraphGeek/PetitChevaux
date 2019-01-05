@@ -36,7 +36,6 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 		}
 		else if(plateau->chemin.bleu[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
-			coulCheval = 0;
 			typeCase = 2;
 		}
 		else {
@@ -54,7 +53,6 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 		}
 		else if(plateau->chemin.rouge[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
-			coulCheval = 1;
 			typeCase = 2;
 		}
 		else {
@@ -72,7 +70,6 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 		}
 		else if(plateau->chemin.vert[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
-			coulCheval = 2;
 			typeCase = 2;
 		}
 		else {
@@ -90,7 +87,6 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 		}
 		else if(plateau->chemin.jaune[0] == 1){
 			//Ici un cheval de la même couleur est présent sur la case de départ
-			coulCheval = 3;
 			typeCase = 2;
 		}
 		else {
@@ -136,9 +132,21 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 			indCheval = 3;
 		}
 		joueur[*indJoueur].cheval[indCheval].etat = 1;
+		if(plateau->chemin.bleu[0] == 1){
+			coulCheval = 0;
+		}
+		else if(plateau->chemin.rouge[0] == 1){
+			coulCheval = 1;
+		}
+		else if(plateau->chemin.vert[0] == 1){
+			coulCheval = 2;
+		}
+		else if(plateau->chemin.jaune[0] == 1){
+			coulCheval = 3;
+		}
 		int i = 0;
 		int val = 0;
-		mangerCheval(plateau, joueur, indJoueur, &indCheval, &coulCheval, &i, &val);
+		mangerCheval(plateau, nbJoueurs, joueur, indJoueur, &indCheval, &coulCheval, &i, &val);
 	}
 	else if(typeCase == 2){
 		printf("Votre cheval est bloqué dans l'écurie, vous ne pouvez pas manger un cheval de même couleur !\n");
@@ -150,14 +158,9 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 }
 
-void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval, int *i, int *val){
-	//Il faut passer l'état du cheval à 0 : Utiliser la fonction mangerCheval()
-	//Il faudra identifier le joueur à l'aide de sa couleur et de la variable coulCheval
-	printf("indJoueur : %d | indCheval : %d | coulCheval : %d | CJoueur : %d\n", *indJoueur, *indCheval, *coulCheval, joueur[*indJoueur].couleur);
+void mangerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval, int *i, int *val){
 	if(joueur[*indJoueur].couleur != *coulCheval){
-		printf("TEST 0\n");
 		if(joueur[0].couleur == *coulCheval){
-			printf("TEST 1\n");
 			joueur[0].cheval[*indCheval].etat = 0;
 			joueur[0].nbChevaux++;
 			if(*coulCheval == 0){
@@ -175,9 +178,9 @@ void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indChev
 			if(joueur[0].nbChevaux == 4){
 				joueur[0].statutJeu = 0;
 			}
+			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
 		}
 		else if(joueur[1].couleur == *coulCheval){
-			printf("TEST 2\n");
 			joueur[1].cheval[*indCheval].etat = 0;
 			joueur[1].nbChevaux++;
 			if(*coulCheval == 0){
@@ -195,9 +198,9 @@ void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indChev
 			if(joueur[1].nbChevaux == 4){
 				joueur[1].statutJeu = 0;
 			}
+			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
 		}
 		else if(joueur[2].couleur == *coulCheval){
-			printf("TEST 3\n");
 			joueur[2].cheval[*indCheval].etat = 0;
 			joueur[2].nbChevaux++;
 			if(*coulCheval == 0){
@@ -215,9 +218,9 @@ void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indChev
 			if(joueur[2].nbChevaux == 4){
 				joueur[2].statutJeu = 0;
 			}
+			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
 		}
 		else if(joueur[3].couleur == *coulCheval){
-			printf("TEST 4\n");
 			joueur[3].cheval[*indCheval].etat = 0;
 			joueur[3].nbChevaux++;
 			if(*coulCheval == 0){
@@ -235,6 +238,7 @@ void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indChev
 			if(joueur[3].nbChevaux == 4){
 				joueur[3].statutJeu = 0;
 			}
+			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
 		}
 	}
 	else {
@@ -243,7 +247,7 @@ void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indChev
 
 }
 
-void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *i, int *val, int *couleur, bool *tmp){
+void demanderDeplacement(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur, int *i, int *val, int *couleur, bool *tmp){
 	int res, coulCheval, indCheval;
 	int cpt = 0;
 	bool bloq;
@@ -307,7 +311,7 @@ void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *
 					else if(joueur[*indJoueur].nbChevaux == 0){
 						indCheval = 3;
 					}
-					mangerCheval(plateau, joueur, indJoueur, &indCheval, &coulCheval, i, val);
+					mangerCheval(plateau, nbJoueurs, joueur, indJoueur, &indCheval, &coulCheval, i, val);
 				}
 				break;				
 
@@ -365,7 +369,7 @@ void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *
 					else if(joueur[*indJoueur].nbChevaux == 0){
 						indCheval = 3;
 					}
-					mangerCheval(plateau, joueur, indJoueur, &indCheval, &coulCheval, i, val);
+					mangerCheval(plateau, nbJoueurs, joueur, indJoueur, &indCheval, &coulCheval, i, val);
 				}
 				break;
 
@@ -423,7 +427,7 @@ void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *
 					else if(joueur[*indJoueur].nbChevaux == 0){
 						indCheval = 3;
 					}
-					mangerCheval(plateau, joueur, indJoueur, &indCheval, &coulCheval, i, val);
+					mangerCheval(plateau, nbJoueurs, joueur, indJoueur, &indCheval, &coulCheval, i, val);
 				}
 				break;
 
@@ -481,7 +485,7 @@ void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *
 					else if(joueur[*indJoueur].nbChevaux == 0){
 						indCheval = 3;
 					}
-					mangerCheval(plateau, joueur, indJoueur, &indCheval, &coulCheval, i, val);
+					mangerCheval(plateau, nbJoueurs, joueur, indJoueur, &indCheval, &coulCheval, i, val);
 				}
 				break;
 			}
@@ -504,7 +508,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.bleu[i] == 1 && tmp == false){
 				couleur = 0;
-				demanderDeplacement(plateau, joueur, indJoueur, &i, val, &couleur, &tmp);
+				demanderDeplacement(plateau, nbJoueurs, joueur, indJoueur, &i, val, &couleur, &tmp);
 			}
 		}
 	}
@@ -513,7 +517,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.rouge[i] == 1 && tmp == false){
 				couleur = 1;
-				demanderDeplacement(plateau, joueur, indJoueur, &i, val, &couleur, &tmp);
+				demanderDeplacement(plateau, nbJoueurs, joueur, indJoueur, &i, val, &couleur, &tmp);
 			}
 		}
 	}
@@ -522,7 +526,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.vert[i] == 1 && tmp == false){
 				couleur = 2;
-				demanderDeplacement(plateau, joueur, indJoueur, &i, val, &couleur, &tmp);
+				demanderDeplacement(plateau, nbJoueurs, joueur, indJoueur, &i, val, &couleur, &tmp);
 			}
 		}
 	}
@@ -531,7 +535,7 @@ void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, i
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.jaune[i] == 1 && tmp == false){
 				couleur = 3;
-				demanderDeplacement(plateau, joueur, indJoueur, &i, val, &couleur, &tmp);
+				demanderDeplacement(plateau, nbJoueurs, joueur, indJoueur, &i, val, &couleur, &tmp);
 			}
 		}
 	}
