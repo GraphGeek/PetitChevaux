@@ -145,19 +145,24 @@ void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval, int *coulCheva
 	*/
 	if(joueur[*indJoueur].couleur != *coulCheval){
 		if(joueur[0].couleur == *coulCheval){
-
+			joueur[0]->cheval.etat = 0;
+			joueur[0]->nbChevaux--;
 		}
 		else if(joueur[1].couleur == *coulCheval){
-
+			joueur[1]->cheval.etat = 0;
+			joueur[1]->nbChevaux--;
 		}
 		else if(joueur[2].couleur == *coulCheval){
-
+			joueur[2]->cheval.etat = 0;
+			joueur[2]->nbChevaux--;
 		}
 		else if(joueur[3].couleur == *coulCheval){
-
+			joueur[3]->cheval.etat = 0;
+			joueur[3]->nbChevaux--;
 		}
 	}
 	else {
+		printf("Vous ne pouvez pas manger votre cheval !\n");
 		//Erreur
 	}
 
