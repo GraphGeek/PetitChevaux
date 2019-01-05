@@ -10,7 +10,7 @@ void demanderDeplacement(plateau *plateau, joueur * joueur, int *indJoueur, int 
 void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, int *indJoueur);
-void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval);
+void mangerCheval(plateau *plateau, joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval, int *i, int *val);
 void verifVictoire(int *nbJoueurs, joueur *joueur);
 void afficherTour(joueur *joueur, int *indJoueur);
 void afficherValeuDe(joueur *joueur, int *indJoueur, int *val);
