@@ -19,8 +19,8 @@ void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJou
 		*indJoueur = 0;
 	}
 	enterToContinue();
-	//effacerEcran();
-	//afficherTitre();
+	effacerEcran();
+	afficherTitre();
 	tour(plateau, nbJoueurs, joueur, indJoueur);
 }
 
