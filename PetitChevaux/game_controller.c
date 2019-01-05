@@ -148,42 +148,6 @@ void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *
 		scanf("%d", &res);
 		if(res == 1){
 			switch(*couleur) {
-				/*
-			case 0  :
-				//Si la case d'arrivée n'est pas occupée par un cheval d'une autre couleur
-				if(plateau->chemin.rouge[*i + *val] == 1 || plateau->chemin.vert[*i + *val] == 1 || plateau->chemin.jaune[*i + *val] == 1){
-					bloq = true;
-				}
-				//Si la case d'arrivée n'est pas occupée par un cheval de même couleur
-				else if(plateau->chemin.bleu[*i + *val] == 0){
-					bloq = false;
-				}
-				//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
-				if(bloq == false){
-					for(int k = *i + 1; k < (*i + *val); k++){
-						if(plateau->chemin.bleu[k] == 0 && plateau->chemin.rouge[k] == 0 && plateau->chemin.vert[k] == 0 && plateau->chemin.jaune[k] == 0){
-							cpt++;
-						}
-					}											
-					//Alors on déplace le cheval
-					if(cpt + 1 == *val){
-						plateau->chemin.bleu[*i] = 0;
-						plateau->chemin.bleu[*i + *val] = 1;
-						*tmp = true;
-						printf("Le cheval avance de %d cases\n", *val);
-					}
-					//Sinon on affiche une erreur
-					else {
-						printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
-					}
-				}
-				else {
-					printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
-				}
-				break;
-				*/
-
-				/*#####################*/
 
 			case 0  :
 				for(int k = *i + 1; k < (*i + *val); k++){
@@ -230,10 +194,7 @@ void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *
 					indCheval = *i + *val;
 					mangerCheval(joueur, indJoueur, &indCheval, &coulCheval);
 				}
-				break;
-
-				/*########################*/
-				
+				break;				
 
 			case 1  :
 				for(int k = *i + 1; k < (*i + *val); k++){
@@ -523,6 +484,7 @@ void debugPlateau(plateau *plateau){
 		*/
 	}
 	//Chemins des joueurs
+	printf(COLOR_CYAN "|" RESET);
 	for(x = 0; x < 55; x++){
 		if(plateau->chemin.bleu[x] == 1){
 			printf(COLOR_CYAN CHEVAL "|" RESET);
@@ -532,6 +494,7 @@ void debugPlateau(plateau *plateau){
 		}
 	}
 	printf("\n");
+	printf(COLOR_RED "|" RESET);
 	for(x = 0; x < 55; x++){
 		if(plateau->chemin.rouge[x] == 1){
 			printf(COLOR_RED CHEVAL "|" RESET);
@@ -541,6 +504,7 @@ void debugPlateau(plateau *plateau){
 		}
 	}
 	printf("\n");
+	printf(COLOR_GREEN "|" RESET);
 	for(x = 0; x < 55; x++){
 		if(plateau->chemin.vert[x] == 1){
 			printf(COLOR_GREEN CHEVAL "|" RESET);
@@ -550,6 +514,7 @@ void debugPlateau(plateau *plateau){
 		}
 	}
 	printf("\n");
+	printf(COLOR_YELLOW "|" RESET);
 	for(x = 0; x < 55; x++){
 		if(plateau->chemin.jaune[x] == 1){
 			printf(COLOR_YELLOW CHEVAL "|" RESET);
