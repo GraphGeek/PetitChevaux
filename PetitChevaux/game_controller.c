@@ -158,87 +158,45 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 	}
 }
 
+void effectuerManger(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval, int *i, int *val, int *numJoueur){
+	joueur[*numJoueur].cheval[*indCheval].etat = 0;
+	joueur[*numJoueur].nbChevaux++;
+	if(*coulCheval == 0){
+		plateau->chemin.bleu[*i + *val] = 0;
+	}
+	else if(*coulCheval == 1){
+		plateau->chemin.rouge[*i + *val] = 0;
+	}
+	else if(*coulCheval == 2){
+		plateau->chemin.vert[*i + *val] = 0;
+	}
+	else if(*coulCheval == 3){
+		plateau->chemin.jaune[*i + *val] = 0;
+	}
+	if(joueur[*numJoueur].nbChevaux == 4){
+		joueur[*numJoueur].statutJeu = 0;
+	}
+	changerJoueur(plateau, nbJoueurs, joueur, indJoueur);
+}
+
 void mangerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval, int *i, int *val){
+	int numJoueur;
 	if(joueur[*indJoueur].couleur != *coulCheval){
 		if(joueur[0].couleur == *coulCheval){
-			joueur[0].cheval[*indCheval].etat = 0;
-			joueur[0].nbChevaux++;
-			if(*coulCheval == 0){
-				plateau->chemin.bleu[*i + *val] = 0;
-			}
-			else if(*coulCheval == 1){
-				plateau->chemin.rouge[*i + *val] = 0;
-			}
-			else if(*coulCheval == 2){
-				plateau->chemin.vert[*i + *val] = 0;
-			}
-			else if(*coulCheval == 3){
-				plateau->chemin.jaune[*i + *val] = 0;
-			}
-			if(joueur[0].nbChevaux == 4){
-				joueur[0].statutJeu = 0;
-			}
-			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
+			numJoueur = 0;
+			effectuerManger(plateau, nbJoueurs, joueur, indJoueur, indJoueur, coulCheval, i, val, &numJoueur);
 		}
 		else if(joueur[1].couleur == *coulCheval){
-			joueur[1].cheval[*indCheval].etat = 0;
-			joueur[1].nbChevaux++;
-			if(*coulCheval == 0){
-				plateau->chemin.bleu[*i + *val] = 0;
-			}
-			else if(*coulCheval == 1){
-				plateau->chemin.rouge[*i + *val] = 0;
-			}
-			else if(*coulCheval == 2){
-				plateau->chemin.vert[*i + *val] = 0;
-			}
-			else if(*coulCheval == 3){
-				plateau->chemin.jaune[*i + *val] = 0;
-			}
-			if(joueur[1].nbChevaux == 4){
-				joueur[1].statutJeu = 0;
-			}
-			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
+			numJoueur = 0;
+			effectuerManger(plateau, nbJoueurs, joueur, indJoueur, indJoueur, coulCheval, i, val, &numJoueur);
 		}
 		else if(joueur[2].couleur == *coulCheval){
-			joueur[2].cheval[*indCheval].etat = 0;
-			joueur[2].nbChevaux++;
-			if(*coulCheval == 0){
-				plateau->chemin.bleu[*i + *val] = 0;
-			}
-			else if(*coulCheval == 1){
-				plateau->chemin.rouge[*i + *val] = 0;
-			}
-			else if(*coulCheval == 2){
-				plateau->chemin.vert[*i + *val] = 0;
-			}
-			else if(*coulCheval == 3){
-				plateau->chemin.jaune[*i + *val] = 0;
-			}
-			if(joueur[2].nbChevaux == 4){
-				joueur[2].statutJeu = 0;
-			}
-			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
+			numJoueur = 0;
+			effectuerManger(plateau, nbJoueurs, joueur, indJoueur, indJoueur, coulCheval, i, val, &numJoueur);
 		}
 		else if(joueur[3].couleur == *coulCheval){
-			joueur[3].cheval[*indCheval].etat = 0;
-			joueur[3].nbChevaux++;
-			if(*coulCheval == 0){
-				plateau->chemin.bleu[*i + *val] = 0;
-			}
-			else if(*coulCheval == 1){
-				plateau->chemin.rouge[*i + *val] = 0;
-			}
-			else if(*coulCheval == 2){
-				plateau->chemin.vert[*i + *val] = 0;
-			}
-			else if(*coulCheval == 3){
-				plateau->chemin.jaune[*i + *val] = 0;
-			}
-			if(joueur[3].nbChevaux == 4){
-				joueur[3].statutJeu = 0;
-			}
-			changerJoueur(plateau, &nbJoueurs, joueur, indJoueur);
+			numJoueur = 0;
+			effectuerManger(plateau, nbJoueurs, joueur, indJoueur, indJoueur, coulCheval, i, val, &numJoueur);
 		}
 	}
 	else {
