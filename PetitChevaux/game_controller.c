@@ -138,102 +138,82 @@ void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval){
 	joueur[*indJoueur].cheval[*indCheval].etat = 0;
 }
 
-int demanderDeplacement(int *i, int *val){
+void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool *tmp){
 	int res;
-	printf("Voulez vous déplacer le cheval à la case %d ? Oui (1) Non (0) : ", *i + *val);
-	scanf("%d", &res);
-	return res;
+	do {
+		printf("Voulez vous déplacer le cheval à la case %d ? Oui (1) Non (0) : ", *i + *val);
+		scanf("%d", &res);
+		if(res == 1){
+			switch(*couleur) {
+			case 0  :
+				plateau->chemin.bleu[*i] = 0;
+				plateau->chemin.bleu[*i + *val] = 1;
+				break;
+				
+			case 1  :
+				plateau->chemin.rouge[*i] = 0;
+				plateau->chemin.rouge[*i + *val] = 1;
+				break;
+
+			case 2  :
+				plateau->chemin.vert[*i] = 0;
+				plateau->chemin.vert[*i + *val] = 1;
+				break;
+
+			case 3  :
+				plateau->chemin.jaune[*i] = 0;
+				plateau->chemin.jaune[*i + *val] = 1;
+				break;
+			}
+			*tmp = true;
+			printf("Le cheval avance de %d cases\n", *val);
+		}
+		else if(res == 0){
+			//On fait quoi ici ?
+		}
+		else {
+			//Et ici ?
+		}
+	} while(res != 1 && res != 0);
 }
 
-//Version plus compacte de la fonction avancerChevak envisageable (idée en tête)
+
 void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, int *indJoueur){
-	int res;
 	bool tmp = false;
-	//Si le joueur est Bleu
+	int couleur = -1;
+	//Si le joueur en cours est bleu
 	if(joueur[*indJoueur].couleur == 0){
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.bleu[i] == 1 && tmp == false){
-				do {
-					res = demanderDeplacement(&i, val);
-					if(res == 1){
-						plateau->chemin.bleu[i] = 0;
-						plateau->chemin.bleu[i + *val] = 1;
-						tmp = true;
-						printf("Le cheval avance de %d cases\n", *val);
-					}
-					else if(res == 0){
-						//On fait quoi ici ?
-					}
-					else {
-						//Et ici ?
-					}
-				} while(res != 1 && res != 0);
+				couleur = 0;
+				demanderDeplacement(plateau, &i, val, &couleur, &tmp);
 			}
 		}
 	}
-	//Si le joueur est Rouge
+	//Si le joueur en cours est rouge
 	else if(joueur[*indJoueur].couleur == 1){
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.rouge[i] == 1 && tmp == false){
-				do {
-					res = demanderDeplacement(&i, val);
-					if(res == 1){
-						plateau->chemin.rouge[i] = 0;
-						plateau->chemin.rouge[i + *val] = 1;
-						tmp = true;
-						printf("Le cheval avance de %d cases\n", *val);
-					}
-					else if(res == 0){
-						//On fait quoi ici ?
-					}
-					else {
-						//Et ici ?
-					}
-				} while(res != 1 && res != 0);
+				couleur = 1;
+				demanderDeplacement(plateau, &i, val, &couleur, &tmp);
 			}
 		}
 	}
-	//Si le joueur est Vert
+	//Si le joueur en cours est vert
 	else if(joueur[*indJoueur].couleur == 2){
 		for(int i = 0; i < 55; i++){
 			if(plateau->chemin.vert[i] == 1 && tmp == false){
-				do {
-					res = demanderDeplacement(&i, val);
-					if(res == 1){
-						plateau->chemin.vert[i] = 0;
-						plateau->chemin.vert[i + *val] = 1;
-						tmp = true;
-						printf("Le cheval avance de %d cases\n", *val);
-					}
-					else if(res == 0){
-						//On fait quoi ici ?
-					}
-					else {
-						//Et ici ?
-					}
-				} while(res != 1 && res != 0);
+				couleur = 2;
+				demanderDeplacement(plateau, &i, val, &couleur, &tmp);
 			}
 		}
 	}
-	//Si le joueur est Jaune
+	//Si le joueur en cours est jaune
 	else if(joueur[*indJoueur].couleur == 3){
 		for(int i = 0; i < 55; i++){
-			if(plateau->chemin.jaune[i] == 1 && tmp == false){
-				do {
-					res = demanderDeplacement(&i, val);
-					if(res == 1){
-						plateau->chemin.jaune[i] = 0;
-						plateau->chemin.jaune[i + *val] = 1;
-						tmp = true;
-						printf("Le cheval avance de %d cases\n", *val);
-					}
-					else if(res == 0){
-						//On fait quoi ici ?
-					}
-					else {
-						//Et ici ?
-					}
-				} while(res != 1 && res != 0);
+			if(plateau->chemin.rouge[i] == 1 && tmp == false){
+				couleur = 3;
+				demanderDeplacement(plateau, &i, val, &couleur, &tmp);
 			}
 		}
 	}

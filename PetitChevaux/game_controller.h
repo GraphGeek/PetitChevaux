@@ -2,7 +2,10 @@
 #define GAME_C_H
 
 int lancerDe();
-int demanderDeplacement(int *i, int *val);
+
+//int demanderDeplacement(int *i, int *val);
+
+void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool *tmp);
 
 void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
