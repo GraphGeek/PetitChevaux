@@ -141,17 +141,25 @@ void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval){
 void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool *tmp){
 	int res;
 	int cpt = 0;
+	bool bloq;
 	do {
 		printf("Voulez vous déplacer le cheval à la case %d ? Oui (1) Non (0) : ", *i + *val + 1);
 		scanf("%d", &res);
 		if(res == 1){
 			switch(*couleur) {
 			case 0  :
-				//Si la case d'arrivée vaut 0
-				if(plateau->chemin.bleu[*i + *val] == 0){
-					//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
+				//Si la case d'arrivée n'est pas occupée par un cheval d'une autre couleur
+				if(plateau->chemin.rouge[*i + *val] == 1 || plateau->chemin.vert[*i + *val] == 1 || plateau->chemin.jaune[*i + *val] == 1){
+					bloq = true;
+				}
+				//Si la case d'arrivée n'est pas occupée par un cheval de même couleur
+				else if(plateau->chemin.bleu[*i + *val] == 0){
+					bloq = false;
+				}
+				//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
+				if(bloq == false){
 					for(int k = *i + 1; k < (*i + *val); k++){
-						if(plateau->chemin.bleu[k] == 0){
+						if(plateau->chemin.bleu[k] == 0 && plateau->chemin.rouge[k] == 0 && plateau->chemin.vert[k] == 0 && plateau->chemin.jaune[k] == 0){
 							cpt++;
 						}
 					}											
@@ -164,11 +172,11 @@ void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool 
 					}
 					//Sinon on affiche une erreur
 					else {
-						printf("Vous ne pouvez pas passer par dessus votre propre cheval !\n");
+						printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
 					}
 				}
 				else {
-					printf("Vous ne pouvez pas passer par dessus votre propre cheval !\n");
+					printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
 				}
 				break;
 				
@@ -199,12 +207,20 @@ void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool 
 				break;
 
 			case 2  :
-				//Si la case d'arrivée vaut 0
-				if(plateau->chemin.vert[*i + *val] == 0){
-					//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
+				//Si la case d'arrivée n'est pas occupée par un cheval d'une autre couleur
+				if(plateau->chemin.bleu[*i + *val] == 1 || plateau->chemin.rouge[*i + *val] == 1 || plateau->chemin.jaune[*i + *val] == 1){
+					bloq = true;
+				}
+				//Si la case d'arrivée n'est pas occupée par un cheval de même couleur
+				else if(plateau->chemin.vert[*i + *val] == 0){
+					bloq = false;
+				}
+				//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
+				if(bloq == false){
 					for(int k = *i + 1; k < (*i + *val); k++){
-						if(plateau->chemin.vert[k] == 0){
-							cpt++;						}
+						if(plateau->chemin.bleu[k] == 0 && plateau->chemin.rouge[k] == 0 && plateau->chemin.vert[k] == 0 && plateau->chemin.jaune[k] == 0){
+							cpt++;
+						}
 					}											
 					//Alors on déplace le cheval
 					if(cpt + 1 == *val){
@@ -215,20 +231,27 @@ void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool 
 					}
 					//Sinon on affiche une erreur
 					else {
-						printf("Vous ne pouvez pas passer par dessus votre propre cheval !\n");
+						printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
 					}
 				}
 				else {
-					printf("Vous ne pouvez pas passer par dessus votre propre cheval !\n");
+					printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
 				}
 				break;
 
 			case 3  :
-				//Si la case d'arrivée vaut 0
-				if(plateau->chemin.jaune[*i + *val] == 0){
-					//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
+				//Si la case d'arrivée n'est pas occupée par un cheval d'une autre couleur
+				if(plateau->chemin.rouge[*i + *val] == 1 || plateau->chemin.vert[*i + *val] == 1 || plateau->chemin.bleu[*i + *val] == 1){
+					bloq = true;
+				}
+				//Si la case d'arrivée n'est pas occupée par un cheval de même couleur
+				else if(plateau->chemin.jaune[*i + *val] == 0){
+					bloq = false;
+				}
+				//Si toutes les cases entre la case actuelle et la case d'arrivée valent 0
+				if(bloq == false){
 					for(int k = *i + 1; k < (*i + *val); k++){
-						if(plateau->chemin.jaune[k] == 0){
+						if(plateau->chemin.bleu[k] == 0 && plateau->chemin.rouge[k] == 0 && plateau->chemin.vert[k] == 0 && plateau->chemin.jaune[k] == 0){
 							cpt++;
 						}
 					}											
@@ -241,11 +264,11 @@ void demanderDeplacement(plateau *plateau, int *i, int *val, int *couleur, bool 
 					}
 					//Sinon on affiche une erreur
 					else {
-						printf("Vous ne pouvez pas passer par dessus votre propre cheval !\n");
+						printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
 					}
 				}
 				else {
-					printf("Vous ne pouvez pas passer par dessus votre propre cheval !\n");
+					printf("Vous ne pouvez pas passer par dessus un autre cheval !\n");
 				}
 				break;
 			}
