@@ -136,11 +136,31 @@ void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoue
 void mangerCheval(joueur *joueur, int *indJoueur, int *indCheval, int *coulCheval){
 	//Il faut passer l'état du cheval à 0 : Utiliser la fonction mangerCheval()
 	//Il faudra identifier le joueur à l'aide de sa couleur et de la variable coulCheval
+	/*
 	if(joueur[*indJoueur].couleur != *coulCheval){
 	printf("Vous avez mangé le cheval et pris sa place\n");
 	joueur[]->cheval.etat = 0;
 	joueur[]->nbChevaux--;
 	}
+	*/
+	if(joueur[*indJoueur].couleur != *coulCheval){
+		if(joueur[0].couleur == *coulCheval){
+
+		}
+		else if(joueur[1].couleur == *coulCheval){
+
+		}
+		else if(joueur[2].couleur == *coulCheval){
+
+		}
+		else if(joueur[3].couleur == *coulCheval){
+
+		}
+	}
+	else {
+		//Erreur
+	}
+
 }
 
 void demanderDeplacement(plateau *plateau, joueur *joueur, int *indJoueur, int *i, int *val, int *couleur, bool *tmp){
