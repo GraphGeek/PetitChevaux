@@ -28,6 +28,5 @@ void enterToContinue(){
 
 int main() {
 	srand(time(NULL));
-	//On initialise le jeu
 	initJeu();
 }

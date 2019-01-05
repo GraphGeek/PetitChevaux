@@ -2,6 +2,7 @@
 #include "main.h"
 #include "init.h"
 
+//Cette fonction permet d'initialiser l'ensemble du jeu et de lancer le premier tour de jeu
 void initJeu() {
 	effacerEcran();
 	int nbJoueurs = 4;
@@ -16,10 +17,12 @@ void initJeu() {
 	tour(&plateau, &nbJoueurs, joueur, &indJoueur);
 }
 
+//Cette fonction permet de détrerminer le premier joueur aléatoirement
 int premierJoueur() {
 	return(rand() % 4); //Modulo 4 car 3 + 1 (Incluant 0)
 }
 
+//Cette fonction permet d'initialiser le plateau de jeu
 void initPlateau(plateau *plateau) {
 	int x, y;
 	//Initialisation à zéro
@@ -38,11 +41,16 @@ void initPlateau(plateau *plateau) {
 	}
 }
 
+//Cette fonction permet d'intitialiser les joueurs en récupérant leur pseudo et leur couleur
 void initJoueurs(int *nbJoueurs, joueur *joueur) {
+
 	int couleur_num = 0;
 	int verif[] = { 0,0,0,0 };
+
 	for (int i = 0; i < *nbJoueurs; i++) {
+		
 		afficherTitre();
+
 		//Enregistrement du pseudo
 		printf("\n");
 
@@ -82,8 +90,10 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 			}
 
 		} while ((verif[couleur_num - 1] != 0) || ((couleur_num < 0) || (couleur_num > 4)));
+		
 		//On verrouille la couleur saisie
 		verif[couleur_num - 1] = 1;
+
 		//On attribue la couleur au joueur
 		joueur[i].couleur = couleur_num - 1;
 
@@ -94,6 +104,7 @@ void initJoueurs(int *nbJoueurs, joueur *joueur) {
 			joueur[i].cheval[j].couleur = couleur_num - 1;
 		}
 
+		//Par défaut un joueur n'a pas remporté la partie
 		joueur[i].victoire = false;
 		effacerEcran();
 	}
