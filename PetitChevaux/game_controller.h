@@ -7,7 +7,8 @@ int lancerDe();
 
 void demanderDeplacement(plateau *plateau, int *nbJoueurs, joueur * joueur, int *indJoueur, int *i, int *val, int *couleur, bool *tmp);
 void changerJoueur(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
-int indiceCheval(joueur *joueur, int *indJoueur);
+int indiceCheval(joueur *joueur, int *numJoueur);
+int indiceChevalJoueurEnCours(joueur *joueur, int *indJoueur);
 int couleurCheval(plateau *plateau);
 void sortirCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *indJoueur);
 void avancerCheval(plateau *plateau, int *nbJoueurs, joueur *joueur, int *val, int *indJoueur);
@@ -17,6 +18,8 @@ void verifVictoire(int *nbJoueurs, joueur *joueur);
 void afficherTour(joueur *joueur, int *indJoueur);
 void afficherValeuDe(joueur *joueur, int *indJoueur, int *val);
 void affichPlateau(plateau *plateau);
+
+int identifierJoueur(joueur *joueur, int *indJoueur, int *coulCheval);
 
 /* DEBUG */
 void debugPlateau(plateau *plateau);
